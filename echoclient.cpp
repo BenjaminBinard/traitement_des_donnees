@@ -81,7 +81,7 @@ int EchoClient::decodeMTHO2(QString mtho2)
 hexatmsb = hexatmsb.substr(0, hexatmsb.length()-1);
 hexatlsb = hexatlsb.substr(0, hexatlsb.length()-1);
 hexastr = hexatmsb + hexatlsb;
-cout << hexastr << ' ' << hexastr.size() << endl;
+//cout << hexastr << ' ' << hexastr.size() << endl;
 
 //-----------------------------------conversion hexa-str ==> decimal-int
 
@@ -98,11 +98,11 @@ int EchoClient::decodeHumidity(QString qstr_humidity)
 {
 	string str_humidity = qstr_humidity.toStdString();
 	str_humidity = str_humidity.substr(24,8);
-	int humidity = stoi(str_humidity, nullptr, 2);
+	int humidity = stoi(str_humidity, 0, 2);
 	return humidity;
-}
+}*/
 
-*/
+
 void EchoClient::traitement(QString message){
 	//qDebug()<<message;
 	QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
@@ -110,7 +110,7 @@ void EchoClient::traitement(QString message){
 	
 	QJsonValue chute1 = jsonObject.value(QString("FALL"));
 	QJsonValue CO21=jsonObject.value(QString("CO2"));
-	QJsonValue humidite1=jsonObject.value(QString("MTH02"));
+	QJsonValue MTHO21=jsonObject.value(QString("MTH02"));
 	QJsonValue four1=jsonObject.value(QString("OVEN"));
 	QJsonValue time1=jsonObject.value(QString("TIME"));
 	QJsonValue tv1=jsonObject.value(QString("TV"));
@@ -119,13 +119,13 @@ void EchoClient::traitement(QString message){
 	
 	int chute=chute1.toInt();
 	double CO2=CO21.toDouble();
-	QString humidite=humidite1.toString();
+	QString MTHO2=MTHO21.toString();
 	bool four=four1.toBool();
 	double time=time1.toDouble();
 	QString tv=tv1.toString();
 	QString user=user1.toString();
 
-	qDebug()<<"chute : "<<chute<<" CO2 : "<<CO2<<" humidite : "<<humidite<<" four : "<<four<<" time : "<<time<<" tv : "<<tv<<" Utilisateur : "<<user;
-	//int MTHO2=decodeMTHO2(humidite);
-//	qDebug()<<MTHO2;
+	qDebug()<<"chute : "<<chute<<" CO2 : "<<CO2<<" humidite : "<<MTHO2<<" four : "<<four<<" time : "<<time<<" tv : "<<tv<<" Utilisateur : "<<user;
+	int temperature=decodeMTHO2(MTHO2);
+	qDebug()<<temperature;
 }
