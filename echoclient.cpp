@@ -1,5 +1,4 @@
 #include "echoclient.h"
-#include "conversion.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
