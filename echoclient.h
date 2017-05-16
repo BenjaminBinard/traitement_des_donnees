@@ -18,6 +18,7 @@ public:
     explicit EchoClient(const QUrl &url, bool debug = false, QObject *parent = Q_NULLPTR);
 	void traitement(QString message);
 	int decodeMTHO2(QString mtho2);
+	int decodeHumidity(QString qstr_humidity);
 Q_SIGNALS:
     void closed();
 
