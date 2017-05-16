@@ -1,4 +1,5 @@
 #include "echoclient.h"
+#include <sstream>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
@@ -6,6 +7,7 @@
 #include <QJsonObject>
 #include <QtCore/QDebug>
 #include <string>
+#include <iostream>
 
 QT_USE_NAMESPACE
 
@@ -39,8 +41,10 @@ int EchoClient::decodeMTHO2(QString mtho2)
 {
 //-------------------------------variables
   string globalstring = mtho2.toStdString();
-  stringstream sstmsb = globalstring.substr(0, 8);
-  stringstream sstlsb = globalstring.substr(8, 16);
+  string tmsb=globalstring.substr(0, 8);
+  string tlsb=globalstring.substr(8, 16);
+  stringstream sstmsb;
+  stringstream sstlsb;
   string hexatmsb;
   string hexatlsb;
   string hexastr;
@@ -89,7 +93,7 @@ temp = temp / 10;
   return temp;
 }
 
-
+/*
 int EchoClient::decodeHumidity(QString qstr_humidity)
 {
 	string str_humidity = qstr_humidity.toStdString();
@@ -98,7 +102,7 @@ int EchoClient::decodeHumidity(QString qstr_humidity)
 	return humidity;
 }
 
-
+*/
 void EchoClient::traitement(QString message){
 	//qDebug()<<message;
 	QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
@@ -122,6 +126,6 @@ void EchoClient::traitement(QString message){
 	QString user=user1.toString();
 
 	qDebug()<<"chute : "<<chute<<" CO2 : "<<CO2<<" humidite : "<<humidite<<" four : "<<four<<" time : "<<time<<" tv : "<<tv<<" Utilisateur : "<<user;
-	int MTHO2=decodeMTHO2(humidite);
-	qDebug()<<MTHO2;
+	//int MTHO2=decodeMTHO2(humidite);
+//	qDebug()<<MTHO2;
 }
