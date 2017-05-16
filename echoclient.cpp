@@ -87,6 +87,16 @@ temp = strtol(hexastr.c_str(), 0, 16);
   return temp;
 }
 
+
+int EchoClient::decodeHumidity(QString qstr_humidity)
+{
+	string str_humidity = qstr_humidity.toStdString();
+	str_humidity = str_humidity.substr(24,8);
+	int humidity = stoi(str_humidity, nullptr, 2);
+	return humidity;
+}
+
+
 void EchoClient::traitement(QString message){
 	//qDebug()<<message;
 	QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
