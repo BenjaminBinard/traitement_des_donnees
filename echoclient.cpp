@@ -82,6 +82,8 @@ cout << hexastr << ' ' << hexastr.size() << endl;
 //-----------------------------------conversion hexa-str ==> decimal-int
 
 temp = strtol(hexastr.c_str(), 0, 16);
+temp = temp - 400;
+temp = temp / 10;
 //cout << temp << endl;
 //-----------------------------------------------------------------
   return temp;
