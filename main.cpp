@@ -2,6 +2,7 @@
 #include <QtCore/QCommandLineParser>
 #include <QtCore/QCommandLineOption>
 #include "echoclient.h"
+#include "conversion.h"
 
 int main(int argc, char *argv[])
 {

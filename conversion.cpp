@@ -1,15 +1,20 @@
 #include "decodage.h"
 
-int decodeMTH02 (string tmsb, string tlsb)
+int decodeMTHO2 (QString mtho2)
 {
+
   //-------------------------------variables
-  stringstream sstmsb;
-  stringstream sstlsb;
+  string globalstring = mtho2.toStdString();
+  stringstream sstmsb = globalstring.substr(0, 8);
+  stringstream sstlsb = globalstring.substr(8, 16);
   string hexatmsb;
   string hexatlsb;
   string hexastr;
   int temp;
-  char * pEnd;
+
+//--------------------------------division de la chaine globale
+
+ 
 
 //---------------------------------conversion bin-string ==> hex-sstream
   bitset<8> setM(tmsb);
@@ -49,7 +54,6 @@ cout << hexastr << ' ' << hexastr.size() << endl;
 
 temp = strtol(hexastr.c_str(), 0, 16);
 //cout << temp << endl;
-
 //-----------------------------------------------------------------
   return temp;
 }

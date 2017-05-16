@@ -1,4 +1,5 @@
 #include "echoclient.h"
+#include "conversion.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
@@ -58,4 +59,6 @@ void EchoClient::traitement(QString message){
 	QString user=user1.toString();
 
 	qDebug()<<"chute : "<<chute<<" CO2 : "<<CO2<<" humidite : "<<humidite<<" four : "<<four<<" time : "<<time<<" tv : "<<tv<<" Utilisateur : "<<user;
+	int MTHO2=decodeMTHO2(humidite);
+	qDebug()<<MTHO2;
 }

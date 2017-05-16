@@ -1,13 +1,15 @@
-#ifndef DECODAGE_H
-#define DECODAGE_H
+#ifndef CONVERSION_H
+#define CONVERSION_H
 
+#include <QtCore>
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <bitset>
 #include <cstdlib>
+#include <echoclient.h>
 using namespace std;
 
-int decodeMTH02(string tmsb, string tlsb);
+int decodeMTHO2(QString mtho2);
 
 #endif
