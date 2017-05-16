@@ -6,6 +6,9 @@
 #include <iostream>
 //#include <Qtcore/QDebug>
 #include <string>
+#include <sstream>
+#include <bitset>
+#include <cstdlib>
 using namespace std;
 
 class EchoClient : public QObject
@@ -14,6 +17,7 @@ class EchoClient : public QObject
 public:
     explicit EchoClient(const QUrl &url, bool debug = false, QObject *parent = Q_NULLPTR);
 	void traitement(QString message);
+	int decodeMTHO2(QString mtho2);
 Q_SIGNALS:
     void closed();
 
