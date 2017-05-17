@@ -11,6 +11,14 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
+INCLUDEPATH += $$PWD/mysql-connector-cpp/include
+DEPENDPATH += $$PWD/mysql-connector-cpp/include
+
+LIBS += -L$$PWD/mysql-connector-cpp/lib/ -lmysqlcppconn
+
+INCLUDEPATH += $$PWD/mysql-connector-cpp/include
+DEPENDPATH += $$PWD/mysql-connector-cpp/include
+
 SOURCES += \
     main.cpp \
     echoclient.cpp

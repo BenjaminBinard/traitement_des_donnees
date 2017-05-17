@@ -42,7 +42,7 @@ int EchoClient::decodeMTHO2(QString mtho2)
 //-------------------------------variables
   string globalstring = mtho2.toStdString();
   string tmsb=globalstring.substr(0, 8);
-  string tlsb=globalstring.substr(8, 16);
+  string tlsb=globalstring.substr(8, 8);
   stringstream sstmsb;
   stringstream sstlsb;
   string hexatmsb;
@@ -93,14 +93,14 @@ temp = temp / 10;
   return temp;
 }
 
-/*
+
 int EchoClient::decodeHumidity(QString qstr_humidity)
 {
 	string str_humidity = qstr_humidity.toStdString();
-	str_humidity = str_humidity.substr(24,8);
+	str_humidity = str_humidity.substr(16,8);
 	int humidity = stoi(str_humidity, 0, 2);
 	return humidity;
-}*/
+}
 
 
 void EchoClient::traitement(QString message){
@@ -127,5 +127,43 @@ void EchoClient::traitement(QString message){
 
 	qDebug()<<"chute : "<<chute<<" CO2 : "<<CO2<<" humidite : "<<MTHO2<<" four : "<<four<<" time : "<<time<<" tv : "<<tv<<" Utilisateur : "<<user;
 	int temperature=decodeMTHO2(MTHO2);
-	qDebug()<<temperature;
+	int humidite=decodeHumidity(MTHO2);
+	qDebug() <<"temperature:"<<temperature<<endl<<"humidite:"<<humidite<<endl;
+
+//si on le fait directement on instancie ce qui concerne mysql
+//puis on fait nos statements
+//voire meme des prepared statements
+try
+  {  
+	sql::Driver *driver;
+	sql::Connection *con;
+	sql::Statement *stmt;
+	sql::ResultSet *res;
+
+	driver = get_driver_instance();
+	con = driver->connect("tcp://127.0.0.1:3306", "equipe", "toor");
+  	con->setSchema("isen_lab");
+
+  stmt = con->createStatement();
+  res = stmt->executeQuery("SELECT 'Hello World!' AS _message");
+  while (res->next()) {
+    cout << "\t... MySQL replies: ";
+    /* Access column data by alias or column name */
+    cout << res->getString("_message") << endl;
+    cout << "\t... MySQL says it again: ";
+    /* Access column data by numeric offset, 1 is the first column */
+    cout << res->getString(1) << endl;
+  }
+  delete res;
+  delete stmt;
+  delete con;
+
+} catch (sql::SQLException &e) {
+  cout << "# ERR: SQLException in " << __FILE__;
+ cout
+     << __LINE__ << endl;
+  cout << "# ERR: " << e.what();
+  cout << " (MySQL error code: " << e.getErrorCode();
+  cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+}
 }

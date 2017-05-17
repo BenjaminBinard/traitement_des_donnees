@@ -1,15 +1,24 @@
 #ifndef ECHOCLIENT_H
 #define ECHOCLIENT_H
 
+//recuperation
 #include <QtCore/QObject>
 #include <QtWebSockets/QWebSocket>
 #include <iostream>
 //#include <Qtcore/QDebug>
+//traitement
 #include <string>
 #include <sstream>
 #include <bitset>
 #include <cstdlib>
 using namespace std;
+//envoi mysql
+#include "mysql_connection.h"
+#include <cppconn/connection.h>
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/resultset.h>
+#include <cppconn/statement.h>
 
 class EchoClient : public QObject
 {

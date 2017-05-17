@@ -14,8 +14,8 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -m64 -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWebSockets -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
+CXXFLAGS      = -std=c++11 -m64 -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+INCPATH       = -I. -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWebSockets -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = echoclient1.0.0
 DISTDIR = /var/www/html/projet_cir2/echo_client/.tmp/echoclient1.0.0
 LINK          = g++
 LFLAGS        = -m64 -Wl,-O1
-LIBS          = $(SUBLIBS) -lQt5WebSockets -lQt5Network -lQt5Core -lpthread 
+LIBS          = $(SUBLIBS) -L/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/lib/ -lmysqlcppconn -lQt5WebSockets -lQt5Network -lQt5Core -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -318,8 +318,21 @@ compiler_rcc_clean:
 compiler_moc_header_make_all: moc_echoclient.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_echoclient.cpp
-moc_echoclient.cpp: echoclient.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/var/www/html/projet_cir2/echo_client -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include echoclient.h -o moc_echoclient.cpp
+moc_echoclient.cpp: mysql_connection.h \
+		cppconn/connection.h \
+		cppconn/build_config.h \
+		cppconn/warning.h \
+		cppconn/sqlstring.h \
+		cppconn/variant.h \
+		cppconn/exception.h \
+		cppconn/driver.h \
+		cppconn/resultset.h \
+		cppconn/config.h \
+		cppconn/resultset_metadata.h \
+		cppconn/datatype.h \
+		cppconn/statement.h \
+		echoclient.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/var/www/html/projet_cir2/echo_client -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include echoclient.h -o moc_echoclient.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -334,11 +347,36 @@ compiler_clean: compiler_moc_header_clean
 ####### Compile
 
 main.o: main.cpp echoclient.h \
+		mysql_connection.h \
+		cppconn/connection.h \
+		cppconn/build_config.h \
+		cppconn/warning.h \
+		cppconn/sqlstring.h \
+		cppconn/variant.h \
+		cppconn/exception.h \
+		cppconn/driver.h \
+		cppconn/resultset.h \
+		cppconn/config.h \
+		cppconn/resultset_metadata.h \
+		cppconn/datatype.h \
+		cppconn/statement.h \
 		conversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 echoclient.o: echoclient.cpp echoclient.h \
-		conversion.h
+		mysql_connection.h \
+		cppconn/connection.h \
+		cppconn/build_config.h \
+		cppconn/warning.h \
+		cppconn/sqlstring.h \
+		cppconn/variant.h \
+		cppconn/exception.h \
+		cppconn/driver.h \
+		cppconn/resultset.h \
+		cppconn/config.h \
+		cppconn/resultset_metadata.h \
+		cppconn/datatype.h \
+		cppconn/statement.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o echoclient.o echoclient.cpp
 
 moc_echoclient.o: moc_echoclient.cpp 
