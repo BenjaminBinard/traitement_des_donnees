@@ -14,7 +14,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -std=c++11 -m64 -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -m64 -pipe -O2 -std=c++0x -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I. -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWebSockets -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 DEL_FILE      = rm -f
@@ -49,9 +49,11 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
-		echoclient.cpp moc_echoclient.cpp
+		echoclient.cpp \
+		database.cpp moc_echoclient.cpp
 OBJECTS       = main.o \
 		echoclient.o \
+		database.o \
 		moc_echoclient.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -105,6 +107,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resolve_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_post.prf \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/c++11.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/warn_on.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resources.prf \
@@ -114,8 +117,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		echo_client.pro echoclient.h main.cpp \
-		echoclient.cpp
+		echo_client.pro echoclient.h \
+		database.h main.cpp \
+		echoclient.cpp \
+		database.cpp
 QMAKE_TARGET  = echoclient
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = echoclient
@@ -198,6 +203,7 @@ Makefile: echo_client.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qma
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resolve_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_post.prf \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/c++11.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/warn_on.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resources.prf \
@@ -264,6 +270,7 @@ Makefile: echo_client.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qma
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resolve_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_post.prf:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/c++11.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/warn_on.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resources.prf:
@@ -291,8 +298,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents echoclient.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp echoclient.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents echoclient.h database.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp echoclient.cpp database.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -318,7 +325,8 @@ compiler_rcc_clean:
 compiler_moc_header_make_all: moc_echoclient.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_echoclient.cpp
-moc_echoclient.cpp: mysql_connection.h \
+moc_echoclient.cpp: database.h \
+		mysql_connection.h \
 		cppconn/connection.h \
 		cppconn/build_config.h \
 		cppconn/warning.h \
@@ -331,6 +339,8 @@ moc_echoclient.cpp: mysql_connection.h \
 		cppconn/resultset_metadata.h \
 		cppconn/datatype.h \
 		cppconn/statement.h \
+		cppconn/prepared_statement.h \
+		echoclient.h \
 		echoclient.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/var/www/html/projet_cir2/echo_client -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include echoclient.h -o moc_echoclient.cpp
 
@@ -347,6 +357,7 @@ compiler_clean: compiler_moc_header_clean
 ####### Compile
 
 main.o: main.cpp echoclient.h \
+		database.h \
 		mysql_connection.h \
 		cppconn/connection.h \
 		cppconn/build_config.h \
@@ -360,10 +371,12 @@ main.o: main.cpp echoclient.h \
 		cppconn/resultset_metadata.h \
 		cppconn/datatype.h \
 		cppconn/statement.h \
+		cppconn/prepared_statement.h \
 		conversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 echoclient.o: echoclient.cpp echoclient.h \
+		database.h \
 		mysql_connection.h \
 		cppconn/connection.h \
 		cppconn/build_config.h \
@@ -376,8 +389,27 @@ echoclient.o: echoclient.cpp echoclient.h \
 		cppconn/config.h \
 		cppconn/resultset_metadata.h \
 		cppconn/datatype.h \
-		cppconn/statement.h
+		cppconn/statement.h \
+		cppconn/prepared_statement.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o echoclient.o echoclient.cpp
+
+database.o: database.cpp database.h \
+		mysql_connection.h \
+		cppconn/connection.h \
+		cppconn/build_config.h \
+		cppconn/warning.h \
+		cppconn/sqlstring.h \
+		cppconn/variant.h \
+		cppconn/exception.h \
+		cppconn/driver.h \
+		cppconn/resultset.h \
+		cppconn/config.h \
+		cppconn/resultset_metadata.h \
+		cppconn/datatype.h \
+		cppconn/statement.h \
+		cppconn/prepared_statement.h \
+		echoclient.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o database.o database.cpp
 
 moc_echoclient.o: moc_echoclient.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_echoclient.o moc_echoclient.cpp

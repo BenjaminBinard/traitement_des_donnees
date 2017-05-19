@@ -1,11 +1,12 @@
 #include "echoclient.h"
+#include "database.h"
 #include <sstream>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QtCore/QDebug>
+//#include <QtCore/QDebug>
 #include <string>
 #include <iostream>
 
@@ -81,14 +82,13 @@ int EchoClient::decodeMTHO2(QString mtho2)
 hexatmsb = hexatmsb.substr(0, hexatmsb.length()-1);
 hexatlsb = hexatlsb.substr(0, hexatlsb.length()-1);
 hexastr = hexatmsb + hexatlsb;
-//cout << hexastr << ' ' << hexastr.size() << endl;
 
 //-----------------------------------conversion hexa-str ==> decimal-int
 
 temp = strtol(hexastr.c_str(), 0, 16);
 temp = temp - 400;
 temp = temp / 10;
-//cout << temp << endl;
+
 //-----------------------------------------------------------------
   return temp;
 }
@@ -103,11 +103,25 @@ int EchoClient::decodeHumidity(QString qstr_humidity)
 }
 
 
-void EchoClient::traitement(QString message){
-	//qDebug()<<message;
+QString EchoClient::decodeTime(double dtime)
+{
+  long long int ssitime = static_cast<long long int>(dtime);
+  string stime = to_string(ssitime);
+  stime = stime.substr(0, stime.length()-3);
+  int itime = stoi(stime);
+  QDateTime timestamp;
+  timestamp.setTime_t(itime);
+  qDebug() << timestamp << endl;
+  QString time = timestamp.addSecs(7200).toString(Qt::ISODate);
+  //qDebug() << time << endl;
+  return time;
+}
+
+void EchoClient::traitement(QString message)
+{
 	QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
 	QJsonObject jsonObject = jsonResponse.object();
-	
+
 	QJsonValue chute1 = jsonObject.value(QString("FALL"));
 	QJsonValue CO21=jsonObject.value(QString("CO2"));
 	QJsonValue MTHO21=jsonObject.value(QString("MTH02"));
@@ -115,60 +129,37 @@ void EchoClient::traitement(QString message){
 	QJsonValue time1=jsonObject.value(QString("TIME"));
 	QJsonValue tv1=jsonObject.value(QString("TV"));
 	QJsonValue user1=jsonObject.value(QString("USER"));
-	//qDebug()<<CO21<<chute1<<humidite1<<four1<<time1<<tv1<<user1;
-	
-	int chute=chute1.toInt();
-	double CO2=CO21.toDouble();
-	QString MTHO2=MTHO21.toString();
-	bool four=four1.toBool();
-	double time=time1.toDouble();
-	QString tv=tv1.toString();
+
+  double dtime = time1.toDouble();
+  QString time = decodeTime(dtime);
+
+	int chute = chute1.toInt();
+	double CO2 = CO21.toDouble();
+  QString tv=tv1.toString();
 	QString user=user1.toString();
+	QString MTHO2 = MTHO21.toString();
+	bool four2 = four1.toBool();
+  QString four;
 
-	qDebug()<<"chute : "<<chute<<" CO2 : "<<CO2<<" humidite : "<<MTHO2<<" four : "<<four<<" time : "<<time<<" tv : "<<tv<<" Utilisateur : "<<user;
-	int temperature=decodeMTHO2(MTHO2);
-	int humidite=decodeHumidity(MTHO2);
-	qDebug() <<"temperature:"<<temperature<<endl<<"humidite:"<<humidite<<endl;
+  if(four2)
+  {
+    four="TRUE";
+  }
+  else
+  {
+    four="FALSE";
+  }
 
-//si on le fait directement on instancie ce qui concerne mysql
-//puis on fait nos statements
-//voire meme des prepared statements
-try
-  {  
-	sql::Driver *driver;
-	sql::Connection *con;
-	sql::Statement *stmt;
-	sql::ResultSet *res;
-	sql::PreparedStatement *pstmt;
+	int temperature = decodeMTHO2(MTHO2);
+	int humidite = decodeHumidity(MTHO2);
 
-	driver = get_driver_instance();
-	con = driver->connect("tcp://127.0.0.1:3306", "equipe", "toor");
-  	con->setSchema("isen_lab");
+	qDebug() << "chute : " << chute << endl << "CO2 : " << CO2 << endl;
+	qDebug() << "capteur MTHO2 : " << MTHO2 << endl << "four : " << four << endl;
+	qDebug() << "tv : " << tv << endl << "utilisateur : " << user << endl;
+	qDebug() << "temperature : " << temperature << endl << "humidite : " << humidite << endl;
+	qDebug() << "time : " << time << endl;
+//PARTIE MYSQL
 
-  	 stmt = con->createStatement();
-	stmt->execute("INSERT INTO ROOM(ID_ROOM, IP, PORT) VALUES(2, '172.31.1.31', '2000')");
- 	// res = stmt->executeQuery("SELECT 'Hello World!' AS _message");
- 	 /*while (res->next()) 
-	 {
-   		 cout << "\t... MySQL replies: ";
-   		 // Access column data by alias or column name
-   		 cout << res->getString("_message") << endl;
-   		 cout << "\t... MySQL says it again: ";
-   	 	// Access column data by numeric offset, 1 is the first column
-   	 	cout << res->getString(1) << endl;
-  	}*/
-	//pstmt = con->preparedStatement("INSERT INTO SENSOR
-  delete res;
-  delete stmt;
-  delete con;
+  isenlab_db = new DataBase(time, temperature, humidite, user, four, CO2, chute, tv);
 
-}
-catch (sql::SQLException &e) 
-{
- 	 cout << "# ERR: SQLException in " << __FILE__;
-	 cout << __LINE__ << endl;
- 	 cout << "# ERR: " << e.what();
- 	 cout << " (MySQL error code: " << e.getErrorCode();
- 	 cout << ", SQLState: " << e.getSQLState() << " )" << endl;
-}
 }

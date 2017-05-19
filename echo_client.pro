@@ -8,6 +8,7 @@ QT       -= gui
 TARGET = echoclient
 CONFIG   += console
 CONFIG   -= app_bundle
+CONFIG   += c++11
 
 TEMPLATE = app
 
@@ -21,10 +22,12 @@ DEPENDPATH += $$PWD/mysql-connector-cpp/include
 
 SOURCES += \
     main.cpp \
-    echoclient.cpp
+    echoclient.cpp \
+    database.cpp
 
 HEADERS += \
-    echoclient.h
+    echoclient.h \
+    database.h
 
 target.path = $$[QT_INSTALL_EXAMPLES]/websockets/echoclient
 INSTALLS += target
