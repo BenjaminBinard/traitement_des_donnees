@@ -19,9 +19,12 @@ int main(int argc, char *argv[])
     parser.process(a);
     bool debug = parser.isSet(dbgOption);
 
+		/*string ip_address = "192.168.199.30";
+		string port = "1000";
+		string complete_url = "ws://" + ip_address + ":" + port;*/
     EchoClient client(QUrl(QStringLiteral("ws://192.168.199.30:1000")), debug);
-	//qDebug()<<client;
+		//qDebug()<<client;
     //QObject::connect(&client, &EchoClient::closed, &a, &QCoreApplication::quit);
-	
+
     return a.exec();
 }

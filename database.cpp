@@ -6,7 +6,6 @@ DataBase::DataBase(QString time, int temperature, int humidite, QString user, QS
     {
   	sql::Driver *driver;
   	sql::Connection *con;
-  	sql::Statement *stmt;
   	sql::ResultSet *res;
   	sql::PreparedStatement *pstmt;
 
@@ -23,6 +22,8 @@ DataBase::DataBase(QString time, int temperature, int humidite, QString user, QS
 
     	//stmt = con->createStatement();
       //res = stmt->executeQuery("INSERT INTO `VALUE` (`DTIME`, `CAR`, `NUM`, `ID_VALUE`, `TYPE`) VALUES (\'dtime\', \'car\', \'num\', NULL, \'id_sensor\');");
+
+
 
       for (int i = 1; i < 8; i++)
       {
@@ -69,65 +70,26 @@ DataBase::DataBase(QString time, int temperature, int humidite, QString user, QS
         QString qsnum = QString::number(num);
 
         //on execute la requete
-        QString test = "INSERT INTO `VALUE` (`DTIME`, `CAR`, `NUM`, `ID_VALUE`, `TYPE`) VALUES (\'"+dtime+"\', \'"+car+"\', \'"+qsnum+"\', NULL, \'"+qsid_sensor+"\');";
-        //string test2 = test.toStdString();
-        qDebug() << test << endl;
-        pstmt = con->prepareStatement(test.toStdString());
+        QString qrequest = "INSERT INTO `VALUE` (`DTIME`, `CAR`, `NUM`, `ID_VALUE`, `TYPE`) VALUES (\'"+dtime+"\', \'"+car+"\', \'"+qsnum+"\', NULL, \'"+qsid_sensor+"\');";
+
+        qDebug() << qrequest << endl;
+        //DECOMMENTER CES LIGNES POUR FAIRE REFONCTIONNER+++++++++++++++++++++++++++++++++++
+        pstmt = con->prepareStatement(qrequest.toStdString());
         res = pstmt->executeQuery();
-        delete pstmt;
+        //delete pstmt;
       }
 
 
 
-      /*
-      on veut remplir VALUE
-      on a 8 capteurs
-      attention, plusieurs types de données
-      variables car et num
-      changeantes selon le type de capteur
-      toute une phase de tests avant d'envoyer
-      id_sensor
-      definir les variables propres à chaque capteur
-      chute co2 four tv utilisateur temperature humidite time
-      i     i   s    s  s            i          i         s
-      if (chute co2 temperature humidite)
-      {
-        num =
-        car = NULL
-      }
-      else if (four tv utilisateur)
-      {
-        num = NULL
-        car =
-      }
 
-      dtime = time
-
-
-      for (int i = 0; i < 8; i++)
-      {
-        insert into
-      }
-      */
-
-  	  //stmt->execute("INSERT INTO VALUE() VALUES()");
-   	// res = stmt->executeQuery("SELECT 'Hello World!' AS _message");
-   	 /*while (res->next())
-  	 {
-     		 cout << "\t... MySQL replies: ";
-     		 // Access column data by alias or column name
-     		 cout << res->getString("_message") << endl;
-     		 cout << "\t... MySQL says it again: ";
-     	 	// Access column data by numeric offset, 1 is the first column
-     	 	cout << res->getString(1) << endl;
-    	}*/
-  	//pstmt = con->preparedStatement("INSERT INTO SENSOR
-    delete res;
-    delete stmt;
     delete con;
-    //delete pstmt;
+    //ET CES LIGNES AUSSI+++++++++++++++++++++++++++++++++++
+    delete pstmt;
+    delete res;
 
   }
+
+
   catch (sql::SQLException &e)
   {
    	 cout << "# ERR: SQLException in " << __FILE__;
@@ -138,70 +100,229 @@ DataBase::DataBase(QString time, int temperature, int humidite, QString user, QS
   }
 }
 
-//getters
-/*QString DataBase::getAddress()
+//aller dans la bdd pour récuperer les seuils
+//les comparer avec nos valeurs
+//si depassement ==> createAlert()
+void DataBase::Comparaison(QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv)
 {
-  return address;
-}
+  try
+    {
+  	sql::Driver *driver;
+  	sql::Connection *con;
+  	sql::Statement *stmt;
+  	sql::ResultSet *res;
 
-QString DataBase::getIdentity()
-{
-  return identity;
-}
+    driver = get_driver_instance();
+    con = driver->connect("tcp://127.0.0.1:3306", "equipe", "toor");
+    con->setSchema("isen_lab");
 
-QString DataBase::getPassword()
-{
-  return password;
-}*/
+    QString numberi;
+    int value;
+    stmt = con->createStatement();
 
+    for (int i = 1; i < 8; i++)
+    {
 
+      numberi = QString::number(i);
 
-
-
-
-
-
+      string request_high = "SELECT `THRESHOLD_HIGH` FROM `SENSOR` WHERE `TYPE` = " + numberi.toStdString() + " AND `ID_ROOM` = 1;";
+      string request_low = "SELECT `THRESHOLD_LOW` FROM `SENSOR` WHERE `TYPE` = " + numberi.toStdString() + " AND `ID_ROOM` = 1;";
 
 
+      switch (i)
+      {
+        case 1:
+          value = chute;
+          break;
+        case 2:
+          value = CO2;
+          break;
+        case 3:
+          value = humidite;
+          break;
+        case 4:
+          value = temperature;
+          break;
+        case 5://ON ENVOIE 0, POUR L'INSTANT PAS D'ALERTES QUAND CHUCK EST LA
+          value = 0;
+          break;
+        case 6:
+          if (tv.toStdString().compare("off") != 0)
+          {
+            value = 1;
+          }
+          else
+          {
+            value = 0;
+          }
+          break;
+        case 7:
+          if (four.toStdString().compare("FALSE") != 0)
+          {
+            value = 1;
+          }
+          else
+          {
+            value = 0;
+          }
+          break;
+      }
 
-/*try
+
+      //depassement du seuil haut
+      res = stmt->executeQuery(request_high);
+      res->next();
+      //cout << stoi(res->getString("THRESHOLD_HIGH")) << endl;
+      if (value >= stoi(res->getString("THRESHOLD_HIGH")))
+      {
+        //on transmet si ça depasse en haut ou en bas(int)
+        //on transmet la value
+        int sensDepassement = 1;
+        createAlert(user, time, i, sensDepassement, value);
+      }
+      else
+      {
+        //depassement du seuil bas
+        res = stmt->executeQuery(request_low);
+        res->next();
+        //cout << stoi(res->getString("THRESHOLD_LOW")) << endl;
+        if (value <= stoi(res->getString("THRESHOLD_LOW")))
+        {
+          int sensDepassement = -1;
+          createAlert(user, time, i, sensDepassement, value);
+        }
+      }
+
+
+
+
+    }
+
+    delete con;
+    delete stmt;
+    delete res;
+  }
+
+
+  catch (sql::SQLException &e)
   {
-	sql::Driver *driver;
-	sql::Connection *con;
-	sql::Statement *stmt;
-	sql::ResultSet *res;
-	sql::PreparedStatement *pstmt;
+     	 cout << "# ERR: SQLException in " << __FILE__;
+    	 cout << __LINE__ << endl;
+     	 cout << "# ERR: " << e.what();
+     	 cout << " (MySQL error code: " << e.getErrorCode();
+     	 cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+  }
 
-	driver = get_driver_instance();
-	con = driver->connect("tcp://127.0.0.1:3306", "equipe", "toor");
-  	con->setSchema("isen_lab");
-
-  	stmt = con->createStatement();
-	stmt->execute("INSERT INTO VALUE() VALUES()");
-
-  //---------------------------------------------------------------------commenté
- 	// res = stmt->executeQuery("SELECT 'Hello World!' AS _message");
- 	 while (res->next())
-	 {
-   		 cout << "\t... MySQL replies: ";
-   		 // Access column data by alias or column name
-   		 cout << res->getString("_message") << endl;
-   		 cout << "\t... MySQL says it again: ";
-   	 	// Access column data by numeric offset, 1 is the first column
-   	 	cout << res->getString(1) << endl;
-  	}
-	//pstmt = con->preparedStatement("INSERT INTO SENSOR
-  //----------------------------------------------------------------fin commenté
-  delete res;
-  delete stmt;
-  delete con;
-
+  qDebug() << "Fin de fonction Comparaison()" << endl;
 }
-catch (sql::SQLException &e)
+
+
+
+void DataBase::createAlert(QString user, QString time, int type, int sensDepassement, int value)
 {
- 	 cout << "# ERR: SQLException in " << __FILE__;
-	 cout << __LINE__ << endl;
- 	 cout << "# ERR: " << e.what();
- 	 cout << " (MySQL error code: " << e.getErrorCode();
- 	 cout << ", SQLState: " << e.getSQLState() << " )" << endl;
-}*/
+  qDebug() << "Une alerte" << endl;
+
+  string id_room = QString::number(1).toStdString();
+  string mail_user = user.toStdString();
+  string dtime = time.toStdString();
+  string detail = " ";
+
+    switch (type)//on construit la chaine 'detail' en fonction du type d'alerte (chute, haute temperature, etc...)
+    {
+      case 1:
+        detail += "L'utilisateur possedant l'addresse " + mail_user + " a chu.";
+        break;
+      case 2:
+        detail += "Le taux de CO2 est dangereusement haut ! (" + to_string(value) + "ppm)";
+        break;
+      case 3:
+        if (sensDepassement == 1)
+        {
+          detail += "Le taux d'humidité est dangereusement haut ! (" + to_string(value) + "%)";
+        }
+        else
+        {
+          detail += "Le taux d'humidité est dangereusement bas ! (" + to_string(value) + "%)";
+        }
+        break;
+      case 4:
+        if (sensDepassement == 1)
+        {
+          detail += "La temperature est trop élevée ! (" + to_string(value) + "°C)";
+        }
+        else
+        {
+          detail += "La temperature est trop basse ! (" + to_string(value) + "°C)";
+        }
+        break;
+      case 5:
+        detail += "L'utilisateur possedant l'addresse " + mail_user + "est présent.";//inutilisé pour l'instant
+        break;
+      case 6:
+        detail += "La télévision est allumée !";
+        break;
+      case 7:
+        detail += "Le four est en marche !";
+        break;
+    }
+
+  //Dans la BDD, table ALERT : id_alert(), id_room, mail_user, dtime, detail
+  try
+    {
+  	sql::Driver *driver;
+  	sql::Connection *con;
+  	sql::Statement *stmt;
+
+    driver = get_driver_instance();
+    con = driver->connect("tcp://127.0.0.1:3306", "equipe", "toor");
+    con->setSchema("isen_lab");
+
+    stmt = con->createStatement();
+
+    string request_insert = "INSERT INTO `ALERT`(`ID_ROOM`, `MAIL_USER`, `DTIME`, `DETAIL`) VALUES(\'"+id_room+"\', \'"+mail_user+"\', \'"+dtime+"\', \'"+detail+"\');";
+    stmt->execute(request_insert);
+    cout << request_insert << endl;
+
+    delete con;
+    delete stmt;
+
+    }
+
+
+  catch (sql::SQLException &e)
+  {
+     	 cout << "# ERR: SQLException in " << __FILE__;
+    	 cout << __LINE__ << endl;
+     	 cout << "# ERR: " << e.what();
+     	 cout << " (MySQL error code: " << e.getErrorCode();
+     	 cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+  }
+
+  //Pour les mails, utilisation de la bibliotheque smtpclient créée par bluetiger9
+  /*
+  https://github.com/bluetiger9/SmtpClient-for-Qt/wiki/Examples#example1
+  https://github.com/bluetiger9/SmtpClient-for-Qt
+  */
+
+  //des erreurs lors de la compilation avec cette partie
+  //  #C'estLaFauteDeLaBibliothèque
+
+  /*SmtpClient smtp("smtp.isen-ouest.fr", 465, SmtpClient::SslConnection);
+
+  smtp.setUser("elevecir2");
+  smtp.setPassword("Cir2Project");
+
+  MimeMessage message;
+  message.setSender(new EmailAddress("steve.corre@isen-ouest.yncrea.fr", "Equipe Isen Lab"));
+  message.addRecipient(new EmailAddress("steve.correlemeur@gmail.com", "Drendaf"));//ajouter les bonnes addresses
+  message.setSubject("Alerte - Service Isen Lab");
+
+  MimeText text;
+  text.setText(QString::fromStdString(detail));
+  message.addPart(&text);
+
+  smtp.connectToHost();
+  smtp.login();
+  smtp.sendMail(message);
+  smtp.quit();*/
+}

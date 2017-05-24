@@ -158,11 +158,8 @@ void EchoClient::traitement(QString message)
 	qDebug() << "tv : " << tv << endl << "utilisateur : " << user << endl;
 	qDebug() << "temperature : " << temperature << endl << "humidite : " << humidite << endl;
 	qDebug() << "time : " << time << endl;
-
-
 //PARTIE MYSQL
 
   isenlab_db = new DataBase(time, temperature, humidite, user, four, CO2, chute, tv);
-  isenlab_db->Comparaison(time, temperature, humidite, user, four, CO2, chute, tv);
 
 }

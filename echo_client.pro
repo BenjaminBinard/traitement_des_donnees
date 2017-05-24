@@ -15,7 +15,9 @@ TEMPLATE = app
 INCLUDEPATH += $$PWD/mysql-connector-cpp/include
 DEPENDPATH += $$PWD/mysql-connector-cpp/include
 
+
 LIBS += -L$$PWD/mysql-connector-cpp/lib/ -lmysqlcppconn
+LIBS += -L$$PWD/SmtpClient/src/SmtpMime
 
 INCLUDEPATH += $$PWD/mysql-connector-cpp/include
 DEPENDPATH += $$PWD/mysql-connector-cpp/include
@@ -23,13 +25,49 @@ DEPENDPATH += $$PWD/mysql-connector-cpp/include
 SOURCES += \
     main.cpp \
     echoclient.cpp \
-    database.cpp
+    database.cpp \
+    SmtpClient/src/smtpclient.cpp \
+    SmtpClient/src/mimetext.cpp \
+    SmtpClient/src/mimepart.cpp \
+    SmtpClient/src/mimemessage.cpp \
+    SmtpClient/src/emailaddress.cpp \
+    SmtpClient/src/mimeattachment.cpp \
+    SmtpClient/src/mimebase64encoder.cpp \
+    SmtpClient/src/mimebase64formatter.cpp \
+    SmtpClient/src/mimebytearrayattachment.cpp \
+    SmtpClient/src/mimecontentencoder.cpp \
+    SmtpClient/src/mimecontentformatter.cpp \
+    SmtpClient/src/mimefile.cpp \
+    SmtpClient/src/mimehtml.cpp \
+    SmtpClient/src/mimeinlinefile.cpp \
+    SmtpClient/src/mimemultipart.cpp \
+    SmtpClient/src/mimeqpencoder.cpp \
+    SmtpClient/src/mimeqpformatter.cpp \
+    SmtpClient/src/quotedprintable.cpp
 
 HEADERS += \
     echoclient.h \
-    database.h
+    database.h \
+    SmtpClient/src/smtpclient.h \
+    SmtpClient/src/mimetext.h \
+    SmtpClient/src/mimepart.h \
+    SmtpClient/src/mimemessage.h \
+    SmtpClient/src/emailaddress.h \
+    SmtpClient/src/smtpmime_global.h \
+    SmtpClient/src/mimeattachment.h \
+    SmtpClient/src/mimebase64encoder.h \
+    SmtpClient/src/mimebase64formatter.h \
+    SmtpClient/src/mimebytearrayattachment.h \
+    SmtpClient/src/mimecontentencoder.h \
+    SmtpClient/src/mimecontentformatter.h \
+    SmtpClient/src/mimefile.h \
+    SmtpClient/src/mimehtml.h \
+    SmtpClient/src/mimeinlinefile.h \
+    SmtpClient/src/mimemultipart.h \
+    SmtpClient/src/mimeqpencoder.h \
+    SmtpClient/src/mimeqpformatter.h \
+    SmtpClient/src/quotedprintable.h
+
 
 target.path = $$[QT_INSTALL_EXAMPLES]/websockets/echoclient
 INSTALLS += target
-
-

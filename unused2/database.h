@@ -10,9 +10,7 @@
 #include <cppconn/prepared_statement.h>
 
 #include <QtCore>
-//#include <QtGui/QApplication>
 #include "echoclient.h"
-#include "SmtpClient/src/SmtpMime"
 
 
 class DataBase
@@ -20,8 +18,8 @@ class DataBase
 public:
   DataBase(QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv);
   ~DataBase();
-  void Comparaison(QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv);
-  void createAlert(QString user, QString time, int type, int sensDepassement, int value);
+  //void Comparaison(QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv);
+  //createAlert();generer une chaine qu'on enverra par mail
 private:
   /*QString address = "tcp://127.0.0.1:3306";
   QString identity = "equipe";
