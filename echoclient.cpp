@@ -25,6 +25,7 @@ EchoClient::EchoClient(const QUrl &url, /*const QUrl &url2,*/ bool debug, QObjec
     this->bdd_complete_path = askBddIp();
     this->bdd_login = askBddLogin();
     this->bdd_pass = askBddPassword();
+    this->id_room = askIdRoom();
     if (m_debug)
         qDebug() << "WebSocket server:" << url;
     connect(&m_webSocket, &QWebSocket::connected, this, &EchoClient::onConnected);
@@ -172,6 +173,14 @@ string EchoClient::askBddPassword()
   return bdd_pass;
 }
 
+string EchoClient::askIdRoom()
+{
+  string id_room;
+  cout << "Quel est le numero  du labo ? (1 ou 2)" << endl;
+  cin >> id_room;
+  return id_room;
+}
+
 
 void EchoClient::traitementChambre(QString message)
 {
@@ -218,8 +227,8 @@ void EchoClient::traitementChambre(QString message)
 
 //PARTIE MYSQL
 
-  isenlab_db = new DataBase(getBddIp(), getBddLogin(), getBddPassword(), time, temperature, humidite, user, four, CO2, chute, tv, "");
-  isenlab_db->Comparaison(getBddIp(), getBddLogin(), getBddPassword(), time, temperature, humidite, user, four, CO2, chute, tv);
+  isenlab_db = new DataBase(getBddIp(), getBddLogin(), getBddPassword(), time, temperature, humidite, user, four, CO2, chute, tv, "", getIdRoom());
+  isenlab_db->Comparaison(getBddIp(), getBddLogin(), getBddPassword(), time, temperature, humidite, user, four, CO2, chute, tv, getIdRoom());
 
 }
 
@@ -242,7 +251,7 @@ void EchoClient::traitementUtilisateur(QString message)
   QString pas = QString::number(pas2);
   qDebug() << "pas :qjsonvalue:int:qstring: " << endl << pas1 << " : " << pas2 << " : " << pas << endl;
 
-  isenlab_db = new DataBase(getBddIp(), getBddLogin(), getBddPassword(), time, 0, 0, user, "", 0, 0, "", pas);
+  isenlab_db = new DataBase(getBddIp(), getBddLogin(), getBddPassword(), time, 0, 0, user, "", 0, 0, "", pas, getIdRoom());
 
 }
 
@@ -260,4 +269,9 @@ string EchoClient::getBddLogin()
 string EchoClient::getBddPassword()
 {
   return bdd_pass;
+}
+
+string EchoClient::getIdRoom()
+{
+  return id_room;
 }

@@ -31,11 +31,11 @@
 class DataBase
 {
 public:
-  DataBase(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv, QString pas);
+  DataBase(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv, QString pas, string id_room);
   ~DataBase();
-  void Comparaison(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv);
-  void createAlert(string path, string login, string pass, QString user, QString time, int type, int sensDepassement, int value);
-  int getIdRoom(string path, string login, string pass, QString user);
+  void Comparaison(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv, string id_room);
+  void createAlert(string path, string login, string pass, QString user, QString time, int type, int sensDepassement, int value, string id_room);
+  //int getIdRoom(string path, string login, string pass, QString user, string id_room);
 private:
 };
 

@@ -6,13 +6,26 @@
 
 /**
 * \fn DataBase
-* Le constructeur de la classe \b DataBase.
-* En fonction des données qui lui sont transmises, il remplira l'entité \b VALUE de la base de données.
+* \brief Le constructeur de la classe \b DataBase.
+* \details En fonction des données qui lui sont transmises, il remplira l'entité \b VALUE de la base de données.
 * Si les quatres valeurs numériques de la trame des chambres sont à 0, il va gérer les données utilisateur (nombre de pas...)
 * Dans le cas contraire, ce sont les données des chambres qui lui sont envoyées.
 * Dans les deux cas, une requête INSERT INTO VALUE(...) VALUES(...) sera envoyée à la base de données.
+* \param path L'adresse de la base de données.
+* \param login L'identifiant pour se connecter à al base de données.
+* \param pass Le mot de passe pour se connecter à la base de données.
+* \param time La date et l'heure
+* \param temperature La valeur de la temperature.
+* \param humidite La valeur de l'humidité en %
+* \param user L'adresse mail de l'utilisateur de la pièce.
+* \param four La valeur associée à la mise en marche du four.
+* \param CO2 La valeur du taux de CO2 en ppm.
+* \param chute La valeur associée à l'éventuelle chute de l'utilisateur
+* \param tv La valeur associée à l'allumage de la télévision
+* \param pas Le nombre de pas effectués par l'utilisateur pendant la dernière heure.
+* \param id_room Le numero de la pièce.
 */
-DataBase::DataBase(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv, QString pas)
+DataBase::DataBase(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv, QString pas, string id_room)
 {
 
   /*ici on gere les données du traitment utilisateur*/
@@ -61,7 +74,7 @@ DataBase::DataBase(string path, string login, string pass, QString time, int tem
   	sql::ResultSet *res;
   	sql::PreparedStatement *pstmt;
 
-    int id_sensor;
+    int itype;
     int num;
     QString car;
     QString dtime;
@@ -113,12 +126,14 @@ DataBase::DataBase(string path, string login, string pass, QString time, int tem
         //le temps est le même dans tous les cas
         dtime = time;
 
-        id_sensor = i;
-        QString qsid_sensor = QString::number(id_sensor);
+        itype = i;
+        QString qstype = QString::number(i);
         QString qsnum = QString::number(num);
 
+        QString qsid_room = QString::fromStdString(id_room);
+
         //on execute la requete
-        QString qrequest = "INSERT INTO `VALUE` (`DTIME`, `CAR`, `NUM`, `ID_VALUE`, `TYPE`) VALUES (\'"+dtime+"\', \'"+car+"\', \'"+qsnum+"\', NULL, \'"+qsid_sensor+"\');";
+        QString qrequest = "INSERT INTO `VALUE` (`DTIME`, `CAR`, `NUM`, `ID_VALUE`, `TYPE`, `ID_ROOM`) VALUES (\'"+dtime+"\', \'"+car+"\', \'"+qsnum+"\', NULL, \'"+qstype+"\', \'"+qsid_room+"\');";
 
         //qDebug() << qrequest << endl;
         //DECOMMENTER CES LIGNES POUR FAIRE REFONCTIONNER+++++++++++++++++++++++++++++++++++
@@ -154,8 +169,19 @@ DataBase::DataBase(string path, string login, string pass, QString time, int tem
 * \fn Comparaison
 * Cette méthode consiste à envoyer une requête SELECT ... FROM ... WHERE pour récupérer les seuils propres à chaque capteur.
 * Les valeurs passées en paramètres sont ensuite comparées avec leurs seuils respectifs, dès qu'un dépassement est constaté, un appel est lancé à la méthode createAlert().
+* \param path L'adresse de la base de données.
+* \param login L'identifiant pour se connecter à al base de données.
+* \param pass Le mot de passe pour se connecter à la base de données.
+* \param time La date et l'heure
+* \param temperature La valeur de la temperature.
+* \param humidite La valeur de l'humidité en %
+* \param user L'adresse mail de l'utilisateur de la pièce.
+* \param four La valeur associée à la mise en marche du four.
+* \param CO2 La valeur du taux de CO2 en ppm.
+* \param chute La valeur associée à l'éventuelle chute de l'utilisateur
+* \param tv La valeur associée à l'allumage de la télévision
 */
-void DataBase::Comparaison(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv)
+void DataBase::Comparaison(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv, string id_room)
 {
   try
     {
@@ -177,8 +203,8 @@ void DataBase::Comparaison(string path, string login, string pass, QString time,
 
       numberi = QString::number(i);
 
-      string request_high = "SELECT `THRESHOLD_HIGH` FROM `SENSOR` WHERE `TYPE` = " + numberi.toStdString() + " AND `ID_ROOM` = 1;";
-      string request_low = "SELECT `THRESHOLD_LOW` FROM `SENSOR` WHERE `TYPE` = " + numberi.toStdString() + " AND `ID_ROOM` = 1;";
+      string request_high = "SELECT `THRESHOLD_HIGH` FROM `SENSOR` WHERE `TYPE` = " + numberi.toStdString() + " AND `ID_ROOM` = "+ id_room +";";
+      string request_low = "SELECT `THRESHOLD_LOW` FROM `SENSOR` WHERE `TYPE` = " + numberi.toStdString() + " AND `ID_ROOM` = "+ id_room +";";
 
 
       switch (i)
@@ -230,7 +256,7 @@ void DataBase::Comparaison(string path, string login, string pass, QString time,
         //on transmet si ça depasse en haut ou en bas(int)
         //on transmet la value
         int sensDepassement = 1;
-        createAlert(path, login, pass, user, time, i, sensDepassement, value);
+        createAlert(path, login, pass, user, time, i, sensDepassement, value, id_room);
       }
       else
       {
@@ -241,7 +267,7 @@ void DataBase::Comparaison(string path, string login, string pass, QString time,
         if (value <= stoi(res->getString("THRESHOLD_LOW")))
         {
           int sensDepassement = -1;
-          createAlert(path, login, pass, user, time, i, sensDepassement, value);
+          createAlert(path, login, pass, user, time, i, sensDepassement, value, id_room);
         }
       }
 
@@ -273,11 +299,10 @@ void DataBase::Comparaison(string path, string login, string pass, QString time,
 * En fonction du type d'alerte (ou plutôt du capteur qui la déclenche), la description de l'alerte changera.
 * une requête INSERT INTO est ensuite envoyée pour ajouter les données liées à l'alerte dans l'entité ALERTE de la base de données.
 */
-void DataBase::createAlert(string path, string login, string pass, QString user, QString time, int type, int sensDepassement, int value)
+void DataBase::createAlert(string path, string login, string pass, QString user, QString time, int type, int sensDepassement, int value, string id_room)
 {
   qDebug() << "Une alerte" << endl;
 
-  string id_room = QString::number(getIdRoom(path, login, pass, user)).toStdString();
   string mail_user = user.toStdString();
   string dtime = time.toStdString();
   string detail = " ";
@@ -390,7 +415,7 @@ void DataBase::createAlert(string path, string login, string pass, QString user,
 * Cette méthode sert à récupérer l'identifiant de la chambre d'un utilisateur
 * \bug Cette fonction est inefficace si, dans la dernière trame, l'utilisateur n'est pas présent dans la pièce...
 */
-int DataBase::getIdRoom(string path, string login, string pass, QString user)
+/*int DataBase::getIdRoom(string path, string login, string pass, QString user)
 {
   try
     {
@@ -440,4 +465,4 @@ int DataBase::getIdRoom(string path, string login, string pass, QString user)
        	 cout << ", SQLState: " << e.getSQLState() << " )" << endl;
     }
 
-}
+}*/

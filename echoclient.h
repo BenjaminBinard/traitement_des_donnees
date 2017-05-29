@@ -21,7 +21,7 @@ using namespace std;
 //envoi mysql
 #include "database.h"
 /**
-* La classe \b DataBase est incluse dans ce fichier car une instance est un attribut de \b EchoClient (afin d'envoyer les données) 
+* La classe \b DataBase est incluse dans ce fichier car une instance est un attribut de \b EchoClient (afin d'envoyer les données)
 */
 class DataBase;
 
@@ -44,10 +44,13 @@ public:
   string askBddIp();
   string askBddLogin();
   string askBddPassword();
+  string askIdRoom();
+
   //getters
   string getBddIp();
   string getBddLogin();
   string getBddPassword();
+  string getIdRoom();
 
 Q_SIGNALS:
     void closed();
@@ -64,6 +67,7 @@ private:
     bool m_debug;
 
     DataBase * isenlab_db;
+    string id_room;
 
     string bdd_complete_path;
     string bdd_login;
