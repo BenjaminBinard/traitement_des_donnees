@@ -1,0 +1,11 @@
+PROJECT_NAME = Projet CIR2 : monitoring
+
+PROJECT_NUMBER = 1.0
+
+OUTPUT_DIRECTORY = /home/
+
+OUTPUT_LANGUAGE = French
+
+INPUT = /home/src
+
+FILE_PATTERNS = *.h

@@ -43,7 +43,7 @@ DataBase::DataBase(string path, string login, string pass, QString time, int tem
 
       stmt = con->createStatement();
 
-      string request_insert = "INSERT INTO `VALUE` (`DTIME`, `CAR`, `NUM`, `ID_VALUE`, `TYPE`) VALUES (\'"+time.toStdString()+"\', \'"+user.toStdString()+"\', \'"+pas.toStdString()+"\', NULL, 8);";
+      string request_insert = "INSERT INTO `VALUE` (`DTIME`, `CAR`, `NUM`, `ID_VALUE`, `TYPE`, `ID_ROOM`) VALUES (\'"+time.toStdString()+"\', \'"+user.toStdString()+"\', \'"+pas.toStdString()+"\', NULL, 8, \'"+id_room+"\');";
       stmt->execute(request_insert);
 
       cout << request_insert << endl;
