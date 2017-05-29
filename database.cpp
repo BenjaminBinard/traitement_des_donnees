@@ -1,7 +1,59 @@
+/**
+* \file database.cpp
+*/
+
 #include "database.h"
 
-DataBase::DataBase(QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv)
+/**
+* \fn DataBase
+* Le constructeur de la classe \b DataBase.
+* En fonction des données qui lui sont transmises, il remplira l'entité \b VALUE de la base de données.
+* Si les quatres valeurs numériques de la trame des chambres sont à 0, il va gérer les données utilisateur (nombre de pas...)
+* Dans le cas contraire, ce sont les données des chambres qui lui sont envoyées.
+* Dans les deux cas, une requête INSERT INTO VALUE(...) VALUES(...) sera envoyée à la base de données.
+*/
+DataBase::DataBase(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv, QString pas)
 {
+
+  /*ici on gere les données du traitment utilisateur*/
+  if (temperature == 0 && humidite == 0 && CO2 == 0 && chute == 0)
+  {
+    try
+      {
+    	sql::Driver *driver;
+    	sql::Connection *con;
+    	sql::Statement *stmt;
+
+      driver = get_driver_instance();
+  	  con = driver->connect(path, login, pass);
+    	con->setSchema("isen_lab");
+
+      stmt = con->createStatement();
+
+      string request_insert = "INSERT INTO `VALUE` (`DTIME`, `CAR`, `NUM`, `ID_VALUE`, `TYPE`) VALUES (\'"+time.toStdString()+"\', \'"+user.toStdString()+"\', \'"+pas.toStdString()+"\', NULL, 8);";
+      stmt->execute(request_insert);
+
+      cout << request_insert << endl;
+
+
+      delete con;
+      delete stmt;
+      }
+
+      catch (sql::SQLException &e)
+      {
+       	 cout << "# ERR: SQLException in " << __FILE__;
+      	 cout << __LINE__ << endl;
+       	 cout << "# ERR: " << e.what();
+       	 cout << " (MySQL error code: " << e.getErrorCode();
+       	 cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+      }
+
+      return;
+  }
+  /*sinon c'est qu'il s'agit des données du traitement chambre*/
+
+
   try
     {
   	sql::Driver *driver;
@@ -17,12 +69,8 @@ DataBase::DataBase(QString time, int temperature, int humidite, QString user, QS
 
 
   	  driver = get_driver_instance();
-  	  con = driver->connect("tcp://127.0.0.1:3306", "equipe", "toor");
+  	  con = driver->connect(path, login, pass);
     	con->setSchema("isen_lab");
-
-    	//stmt = con->createStatement();
-      //res = stmt->executeQuery("INSERT INTO `VALUE` (`DTIME`, `CAR`, `NUM`, `ID_VALUE`, `TYPE`) VALUES (\'dtime\', \'car\', \'num\', NULL, \'id_sensor\');");
-
 
 
       for (int i = 1; i < 8; i++)
@@ -72,11 +120,10 @@ DataBase::DataBase(QString time, int temperature, int humidite, QString user, QS
         //on execute la requete
         QString qrequest = "INSERT INTO `VALUE` (`DTIME`, `CAR`, `NUM`, `ID_VALUE`, `TYPE`) VALUES (\'"+dtime+"\', \'"+car+"\', \'"+qsnum+"\', NULL, \'"+qsid_sensor+"\');";
 
-        qDebug() << qrequest << endl;
+        //qDebug() << qrequest << endl;
         //DECOMMENTER CES LIGNES POUR FAIRE REFONCTIONNER+++++++++++++++++++++++++++++++++++
         pstmt = con->prepareStatement(qrequest.toStdString());
         res = pstmt->executeQuery();
-        //delete pstmt;
       }
 
 
@@ -103,7 +150,12 @@ DataBase::DataBase(QString time, int temperature, int humidite, QString user, QS
 //aller dans la bdd pour récuperer les seuils
 //les comparer avec nos valeurs
 //si depassement ==> createAlert()
-void DataBase::Comparaison(QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv)
+/**
+* \fn Comparaison
+* Cette méthode consiste à envoyer une requête SELECT ... FROM ... WHERE pour récupérer les seuils propres à chaque capteur.
+* Les valeurs passées en paramètres sont ensuite comparées avec leurs seuils respectifs, dès qu'un dépassement est constaté, un appel est lancé à la méthode createAlert().
+*/
+void DataBase::Comparaison(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv)
 {
   try
     {
@@ -113,7 +165,7 @@ void DataBase::Comparaison(QString time, int temperature, int humidite, QString 
   	sql::ResultSet *res;
 
     driver = get_driver_instance();
-    con = driver->connect("tcp://127.0.0.1:3306", "equipe", "toor");
+    con = driver->connect(path, login, pass);
     con->setSchema("isen_lab");
 
     QString numberi;
@@ -178,7 +230,7 @@ void DataBase::Comparaison(QString time, int temperature, int humidite, QString 
         //on transmet si ça depasse en haut ou en bas(int)
         //on transmet la value
         int sensDepassement = 1;
-        createAlert(user, time, i, sensDepassement, value);
+        createAlert(path, login, pass, user, time, i, sensDepassement, value);
       }
       else
       {
@@ -189,12 +241,9 @@ void DataBase::Comparaison(QString time, int temperature, int humidite, QString 
         if (value <= stoi(res->getString("THRESHOLD_LOW")))
         {
           int sensDepassement = -1;
-          createAlert(user, time, i, sensDepassement, value);
+          createAlert(path, login, pass, user, time, i, sensDepassement, value);
         }
       }
-
-
-
 
     }
 
@@ -218,11 +267,17 @@ void DataBase::Comparaison(QString time, int temperature, int humidite, QString 
 
 
 
-void DataBase::createAlert(QString user, QString time, int type, int sensDepassement, int value)
+/**
+* \fn createAlert
+* Cette méthode peut être appelée par \b Comparaison() dans la cas de dépassement d'un seuil.
+* En fonction du type d'alerte (ou plutôt du capteur qui la déclenche), la description de l'alerte changera.
+* une requête INSERT INTO est ensuite envoyée pour ajouter les données liées à l'alerte dans l'entité ALERTE de la base de données.
+*/
+void DataBase::createAlert(string path, string login, string pass, QString user, QString time, int type, int sensDepassement, int value)
 {
   qDebug() << "Une alerte" << endl;
 
-  string id_room = QString::number(1).toStdString();
+  string id_room = QString::number(getIdRoom(path, login, pass, user)).toStdString();
   string mail_user = user.toStdString();
   string dtime = time.toStdString();
   string detail = " ";
@@ -238,11 +293,11 @@ void DataBase::createAlert(QString user, QString time, int type, int sensDepasse
       case 3:
         if (sensDepassement == 1)
         {
-          detail += "Le taux d'humidité est dangereusement haut ! (" + to_string(value) + "%)";
+          detail += "Humidité trop importante ! (" + to_string(value) + ")";
         }
         else
         {
-          detail += "Le taux d'humidité est dangereusement bas ! (" + to_string(value) + "%)";
+          detail += "Humidité critiquement basse ! (" + to_string(value) + ")";
         }
         break;
       case 4:
@@ -274,14 +329,16 @@ void DataBase::createAlert(QString user, QString time, int type, int sensDepasse
   	sql::Statement *stmt;
 
     driver = get_driver_instance();
-    con = driver->connect("tcp://127.0.0.1:3306", "equipe", "toor");
+    con = driver->connect(path, login, pass);
     con->setSchema("isen_lab");
 
     stmt = con->createStatement();
 
+
     string request_insert = "INSERT INTO `ALERT`(`ID_ROOM`, `MAIL_USER`, `DTIME`, `DETAIL`) VALUES(\'"+id_room+"\', \'"+mail_user+"\', \'"+dtime+"\', \'"+detail+"\');";
+    //cout << request_insert << endl;
     stmt->execute(request_insert);
-    cout << request_insert << endl;
+    //cout << request_insert << endl;
 
     delete con;
     delete stmt;
@@ -325,4 +382,62 @@ void DataBase::createAlert(QString user, QString time, int type, int sensDepasse
   smtp.login();
   smtp.sendMail(message);
   smtp.quit();*/
+}
+
+
+/**
+* \fn getIdRoom
+* Cette méthode sert à récupérer l'identifiant de la chambre d'un utilisateur
+* \bug Cette fonction est inefficace si, dans la dernière trame, l'utilisateur n'est pas présent dans la pièce...
+*/
+int DataBase::getIdRoom(string path, string login, string pass, QString user)
+{
+  try
+    {
+  	sql::Driver *driver;
+  	sql::Connection *con;
+    sql::Statement *stmt;
+    sql::ResultSet *res;
+
+    int idroom;
+
+    //erreur sql si l'utilisateur n'est pas dans la piece et qu'il y a une alerte
+    //par defaut la piece est 1
+    if (user.toStdString().compare("") == 0)
+    {
+      idroom = 1;
+      return idroom;
+    }
+
+    driver = get_driver_instance();
+    con = driver->connect(path, login, pass);
+    con->setSchema("isen_lab");
+
+    stmt = con->createStatement();
+
+    string request_select = "SELECT `ID_ROOM` FROM `USER_ROOM` WHERE `MAIL_USER` = \'"+user.toStdString()+"\';";
+    res = stmt->executeQuery(request_select);
+    res->next();
+
+    idroom = stoi(res->getString("ID_ROOM"));
+
+
+    delete con;
+    delete stmt;
+    delete res;
+
+    qDebug() << "Room : " << idroom << endl;
+    return idroom;
+
+    }
+
+    catch (sql::SQLException &e)
+    {
+       	 cout << "# ERR: SQLException in " << __FILE__;
+      	 cout << __LINE__ << endl;
+       	 cout << "# ERR: " << e.what();
+       	 cout << " (MySQL error code: " << e.getErrorCode();
+       	 cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+    }
+
 }

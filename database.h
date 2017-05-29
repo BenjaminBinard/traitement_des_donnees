@@ -1,3 +1,8 @@
+/**
+* \file database.h
+* Le fichier d'en-tête de la classe DataBase.
+*/
+
 #ifndef DATABASE_H
 #define DATABASE_H
 
@@ -12,20 +17,26 @@
 #include <QtCore>
 //#include <QtGui/QApplication>
 #include "echoclient.h"
-#include "SmtpClient/src/SmtpMime"
+//#include "SmtpClient/src/SmtpMime"
 
 
+/**
+* \class DataBase database.h
+* La classe \b DataBase sert à intéragir avec la base de données.
+* Ses fonctionnalités consistent à envoyer les valeurs reçues et traitées dans \b EchoClient dans la base de données,
+* mais aussi à récupérer les données de seuils pour les comparer avec les valeurs de la trame actuelle.
+* Si un dépassement est constaté, une alerte sera créée et envoyée dans l'entité correspondante de la base de données.
+* \bug L'envoi de mails aurait pû faire l'objet d'une méthode de cette classe mais la bibliotheque choisie n'a pas permis cela.
+*/
 class DataBase
 {
 public:
-  DataBase(QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv);
+  DataBase(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv, QString pas);
   ~DataBase();
-  void Comparaison(QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv);
-  void createAlert(QString user, QString time, int type, int sensDepassement, int value);
+  void Comparaison(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv);
+  void createAlert(string path, string login, string pass, QString user, QString time, int type, int sensDepassement, int value);
+  int getIdRoom(string path, string login, string pass, QString user);
 private:
-  /*QString address = "tcp://127.0.0.1:3306";
-  QString identity = "equipe";
-  QString password = "toor";*/
 };
 
 

@@ -1,3 +1,8 @@
+/**
+* \file echoclient.cpp
+*/
+
+
 #include "echoclient.h"
 #include "database.h"
 #include <sstream>
@@ -6,21 +11,26 @@
 #include <QJsonValue>
 #include <QJsonArray>
 #include <QJsonObject>
-//#include <QtCore/QDebug>
 #include <string>
 #include <iostream>
 
 QT_USE_NAMESPACE
 
-EchoClient::EchoClient(const QUrl &url, bool debug, QObject *parent) :
+EchoClient::EchoClient(const QUrl &url, /*const QUrl &url2,*/ bool debug, QObject *parent) :
     QObject(parent),
     m_url(url),
+    /*u_url(url2),*/
     m_debug(debug)
 {
+    this->bdd_complete_path = askBddIp();
+    this->bdd_login = askBddLogin();
+    this->bdd_pass = askBddPassword();
     if (m_debug)
         qDebug() << "WebSocket server:" << url;
     connect(&m_webSocket, &QWebSocket::connected, this, &EchoClient::onConnected);
+    /*connect(&u_webSocket, &QWebSocket::connected, this, &EchoClient::onConnected);*/
     //connect(&m_webSocket, &QWebSocket::disconnected, this, &EchoClient::closed);
+    /*u_webSocket.open(QUrl(url2));*/
     m_webSocket.open(QUrl(url));
 }
 
@@ -35,7 +45,17 @@ void EchoClient::onConnected()
 
 void EchoClient::onTextMessageReceived(QString message)
 {
-    traitement(message);
+  qDebug() << "TAILLE DE LA TRAME " << message.length() << endl;
+  if (message.length() > 100)
+  {
+    qDebug() << "TRAITEMENT CHAMBRE" << endl;
+    traitementChambre(message);
+  }
+  else
+  {
+    qDebug() << "TRAITEMENT UTILISATEUR" << endl;
+    traitementUtilisateur(message);
+  }
 }
 
 int EchoClient::decodeMTHO2(QString mtho2)
@@ -116,8 +136,44 @@ QString EchoClient::decodeTime(double dtime)
   //qDebug() << time << endl;
   return time;
 }
+//if not yet defined ...
+string EchoClient::askBddIp()
+{
+  string bdd_ip;
+  string bdd_port;
 
-void EchoClient::traitement(QString message)
+  cout << "Quelle est l'addresse utilisée pour se connecter à la base de données ? " << endl;
+  cin >> bdd_ip;
+  //cout << bdd_ip << endl;
+
+  cout << "le port utilisé ? " << endl;
+  cin >> bdd_port;
+  //cout << bdd_port << endl;
+
+  string bdd_complete_path = "tcp://" + bdd_ip + ":" + bdd_port;
+  return bdd_complete_path;
+}
+
+string EchoClient::askBddLogin()
+{
+  string bdd_login;
+  cout << "Identifiant : " << endl;
+  cin >> bdd_login;
+  //cout << bdd_login << endl;
+  return bdd_login;
+}
+
+string EchoClient::askBddPassword()
+{
+  string bdd_pass;
+  cout << "Mot de passe : " << endl;
+  cin >> bdd_pass;
+  //cout << bdd_pass << endl;
+  return bdd_pass;
+}
+
+
+void EchoClient::traitementChambre(QString message)
 {
 	QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
 	QJsonObject jsonObject = jsonResponse.object();
@@ -162,7 +218,46 @@ void EchoClient::traitement(QString message)
 
 //PARTIE MYSQL
 
-  isenlab_db = new DataBase(time, temperature, humidite, user, four, CO2, chute, tv);
-  isenlab_db->Comparaison(time, temperature, humidite, user, four, CO2, chute, tv);
+  isenlab_db = new DataBase(getBddIp(), getBddLogin(), getBddPassword(), time, temperature, humidite, user, four, CO2, chute, tv, "");
+  isenlab_db->Comparaison(getBddIp(), getBddLogin(), getBddPassword(), time, temperature, humidite, user, four, CO2, chute, tv);
 
+}
+
+void EchoClient::traitementUtilisateur(QString message)
+{
+  QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
+  qDebug() << "trame : " << jsonResponse << endl;
+	QJsonObject jsonObject = jsonResponse.object();
+
+  QJsonValue time1=jsonObject.value(QString("TIME"));
+	QJsonValue pas1=jsonObject.value(QString("STEP"));
+	QJsonValue user1=jsonObject.value(QString("USER"));
+
+  double dtime = time1.toDouble();
+  QString time = decodeTime(dtime);
+
+  QString user = user1.toString();
+
+  int pas2 = pas1.toInt();
+  QString pas = QString::number(pas2);
+  qDebug() << "pas :qjsonvalue:int:qstring: " << endl << pas1 << " : " << pas2 << " : " << pas << endl;
+
+  isenlab_db = new DataBase(getBddIp(), getBddLogin(), getBddPassword(), time, 0, 0, user, "", 0, 0, "", pas);
+
+}
+
+
+string EchoClient::getBddIp()
+{
+  return bdd_complete_path;
+}
+
+string EchoClient::getBddLogin()
+{
+  return bdd_login;
+}
+
+string EchoClient::getBddPassword()
+{
+  return bdd_pass;
 }

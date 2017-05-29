@@ -50,51 +50,11 @@ OBJECTS_DIR   = ./
 
 SOURCES       = main.cpp \
 		echoclient.cpp \
-		database.cpp \
-		SmtpClient/src/smtpclient.cpp \
-		SmtpClient/src/mimetext.cpp \
-		SmtpClient/src/mimepart.cpp \
-		SmtpClient/src/mimemessage.cpp \
-		SmtpClient/src/emailaddress.cpp \
-		SmtpClient/src/mimeattachment.cpp \
-		SmtpClient/src/mimebase64encoder.cpp \
-		SmtpClient/src/mimebase64formatter.cpp \
-		SmtpClient/src/mimebytearrayattachment.cpp \
-		SmtpClient/src/mimecontentencoder.cpp \
-		SmtpClient/src/mimecontentformatter.cpp \
-		SmtpClient/src/mimefile.cpp \
-		SmtpClient/src/mimehtml.cpp \
-		SmtpClient/src/mimeinlinefile.cpp \
-		SmtpClient/src/mimemultipart.cpp \
-		SmtpClient/src/mimeqpencoder.cpp \
-		SmtpClient/src/mimeqpformatter.cpp \
-		SmtpClient/src/quotedprintable.cpp moc_echoclient.cpp \
-		moc_smtpclient.cpp \
-		moc_mimecontentformatter.cpp
+		database.cpp moc_echoclient.cpp
 OBJECTS       = main.o \
 		echoclient.o \
 		database.o \
-		smtpclient.o \
-		mimetext.o \
-		mimepart.o \
-		mimemessage.o \
-		emailaddress.o \
-		mimeattachment.o \
-		mimebase64encoder.o \
-		mimebase64formatter.o \
-		mimebytearrayattachment.o \
-		mimecontentencoder.o \
-		mimecontentformatter.o \
-		mimefile.o \
-		mimehtml.o \
-		mimeinlinefile.o \
-		mimemultipart.o \
-		mimeqpencoder.o \
-		mimeqpformatter.o \
-		quotedprintable.o \
-		moc_echoclient.o \
-		moc_smtpclient.o \
-		moc_mimecontentformatter.o
+		moc_echoclient.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -158,46 +118,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		echo_client.pro echoclient.h \
-		database.h \
-		SmtpClient/src/smtpclient.h \
-		SmtpClient/src/mimetext.h \
-		SmtpClient/src/mimepart.h \
-		SmtpClient/src/mimemessage.h \
-		SmtpClient/src/emailaddress.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimeattachment.h \
-		SmtpClient/src/mimebase64encoder.h \
-		SmtpClient/src/mimebase64formatter.h \
-		SmtpClient/src/mimebytearrayattachment.h \
-		SmtpClient/src/mimecontentencoder.h \
-		SmtpClient/src/mimecontentformatter.h \
-		SmtpClient/src/mimefile.h \
-		SmtpClient/src/mimehtml.h \
-		SmtpClient/src/mimeinlinefile.h \
-		SmtpClient/src/mimemultipart.h \
-		SmtpClient/src/mimeqpencoder.h \
-		SmtpClient/src/mimeqpformatter.h \
-		SmtpClient/src/quotedprintable.h main.cpp \
+		database.h main.cpp \
 		echoclient.cpp \
-		database.cpp \
-		SmtpClient/src/smtpclient.cpp \
-		SmtpClient/src/mimetext.cpp \
-		SmtpClient/src/mimepart.cpp \
-		SmtpClient/src/mimemessage.cpp \
-		SmtpClient/src/emailaddress.cpp \
-		SmtpClient/src/mimeattachment.cpp \
-		SmtpClient/src/mimebase64encoder.cpp \
-		SmtpClient/src/mimebase64formatter.cpp \
-		SmtpClient/src/mimebytearrayattachment.cpp \
-		SmtpClient/src/mimecontentencoder.cpp \
-		SmtpClient/src/mimecontentformatter.cpp \
-		SmtpClient/src/mimefile.cpp \
-		SmtpClient/src/mimehtml.cpp \
-		SmtpClient/src/mimeinlinefile.cpp \
-		SmtpClient/src/mimemultipart.cpp \
-		SmtpClient/src/mimeqpencoder.cpp \
-		SmtpClient/src/mimeqpformatter.cpp \
-		SmtpClient/src/quotedprintable.cpp
+		database.cpp
 QMAKE_TARGET  = echoclient
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = echoclient
@@ -375,8 +298,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents echoclient.h database.h SmtpClient/src/smtpclient.h SmtpClient/src/mimetext.h SmtpClient/src/mimepart.h SmtpClient/src/mimemessage.h SmtpClient/src/emailaddress.h SmtpClient/src/smtpmime_global.h SmtpClient/src/mimeattachment.h SmtpClient/src/mimebase64encoder.h SmtpClient/src/mimebase64formatter.h SmtpClient/src/mimebytearrayattachment.h SmtpClient/src/mimecontentencoder.h SmtpClient/src/mimecontentformatter.h SmtpClient/src/mimefile.h SmtpClient/src/mimehtml.h SmtpClient/src/mimeinlinefile.h SmtpClient/src/mimemultipart.h SmtpClient/src/mimeqpencoder.h SmtpClient/src/mimeqpformatter.h SmtpClient/src/quotedprintable.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp echoclient.cpp database.cpp SmtpClient/src/smtpclient.cpp SmtpClient/src/mimetext.cpp SmtpClient/src/mimepart.cpp SmtpClient/src/mimemessage.cpp SmtpClient/src/emailaddress.cpp SmtpClient/src/mimeattachment.cpp SmtpClient/src/mimebase64encoder.cpp SmtpClient/src/mimebase64formatter.cpp SmtpClient/src/mimebytearrayattachment.cpp SmtpClient/src/mimecontentencoder.cpp SmtpClient/src/mimecontentformatter.cpp SmtpClient/src/mimefile.cpp SmtpClient/src/mimehtml.cpp SmtpClient/src/mimeinlinefile.cpp SmtpClient/src/mimemultipart.cpp SmtpClient/src/mimeqpencoder.cpp SmtpClient/src/mimeqpformatter.cpp SmtpClient/src/quotedprintable.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents echoclient.h database.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp echoclient.cpp database.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -399,9 +322,9 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_echoclient.cpp moc_smtpclient.cpp moc_mimecontentformatter.cpp
+compiler_moc_header_make_all: moc_echoclient.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_echoclient.cpp moc_smtpclient.cpp moc_mimecontentformatter.cpp
+	-$(DEL_FILE) moc_echoclient.cpp
 moc_echoclient.cpp: database.h \
 		mysql_connection.h \
 		cppconn/connection.h \
@@ -418,32 +341,8 @@ moc_echoclient.cpp: database.h \
 		cppconn/statement.h \
 		cppconn/prepared_statement.h \
 		echoclient.h \
-		SmtpClient/src/SmtpMime \
-		SmtpClient/src/smtpclient.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimemessage.h \
-		SmtpClient/src/mimepart.h \
-		SmtpClient/src/mimemultipart.h \
-		SmtpClient/src/emailaddress.h \
-		SmtpClient/src/mimehtml.h \
-		SmtpClient/src/mimetext.h \
-		SmtpClient/src/mimeattachment.h \
-		SmtpClient/src/mimefile.h \
-		SmtpClient/src/mimeinlinefile.h \
-		SmtpClient/src/mimebytearrayattachment.h \
 		echoclient.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/var/www/html/projet_cir2/echo_client -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include echoclient.h -o moc_echoclient.cpp
-
-moc_smtpclient.cpp: SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimemessage.h \
-		SmtpClient/src/mimepart.h \
-		SmtpClient/src/mimemultipart.h \
-		SmtpClient/src/emailaddress.h \
-		SmtpClient/src/smtpclient.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/var/www/html/projet_cir2/echo_client -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include SmtpClient/src/smtpclient.h -o moc_smtpclient.cpp
-
-moc_mimecontentformatter.cpp: SmtpClient/src/mimecontentformatter.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/var/www/html/projet_cir2/echo_client -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWebSockets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include SmtpClient/src/mimecontentformatter.h -o moc_mimecontentformatter.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -473,19 +372,6 @@ main.o: main.cpp echoclient.h \
 		cppconn/datatype.h \
 		cppconn/statement.h \
 		cppconn/prepared_statement.h \
-		SmtpClient/src/SmtpMime \
-		SmtpClient/src/smtpclient.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimemessage.h \
-		SmtpClient/src/mimepart.h \
-		SmtpClient/src/mimemultipart.h \
-		SmtpClient/src/emailaddress.h \
-		SmtpClient/src/mimehtml.h \
-		SmtpClient/src/mimetext.h \
-		SmtpClient/src/mimeattachment.h \
-		SmtpClient/src/mimefile.h \
-		SmtpClient/src/mimeinlinefile.h \
-		SmtpClient/src/mimebytearrayattachment.h \
 		conversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
@@ -504,20 +390,7 @@ echoclient.o: echoclient.cpp echoclient.h \
 		cppconn/resultset_metadata.h \
 		cppconn/datatype.h \
 		cppconn/statement.h \
-		cppconn/prepared_statement.h \
-		SmtpClient/src/SmtpMime \
-		SmtpClient/src/smtpclient.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimemessage.h \
-		SmtpClient/src/mimepart.h \
-		SmtpClient/src/mimemultipart.h \
-		SmtpClient/src/emailaddress.h \
-		SmtpClient/src/mimehtml.h \
-		SmtpClient/src/mimetext.h \
-		SmtpClient/src/mimeattachment.h \
-		SmtpClient/src/mimefile.h \
-		SmtpClient/src/mimeinlinefile.h \
-		SmtpClient/src/mimebytearrayattachment.h
+		cppconn/prepared_statement.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o echoclient.o echoclient.cpp
 
 database.o: database.cpp database.h \
@@ -535,127 +408,11 @@ database.o: database.cpp database.h \
 		cppconn/datatype.h \
 		cppconn/statement.h \
 		cppconn/prepared_statement.h \
-		echoclient.h \
-		SmtpClient/src/SmtpMime \
-		SmtpClient/src/smtpclient.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimemessage.h \
-		SmtpClient/src/mimepart.h \
-		SmtpClient/src/mimemultipart.h \
-		SmtpClient/src/emailaddress.h \
-		SmtpClient/src/mimehtml.h \
-		SmtpClient/src/mimetext.h \
-		SmtpClient/src/mimeattachment.h \
-		SmtpClient/src/mimefile.h \
-		SmtpClient/src/mimeinlinefile.h \
-		SmtpClient/src/mimebytearrayattachment.h
+		echoclient.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o database.o database.cpp
-
-smtpclient.o: SmtpClient/src/smtpclient.cpp SmtpClient/src/smtpclient.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimemessage.h \
-		SmtpClient/src/mimepart.h \
-		SmtpClient/src/mimemultipart.h \
-		SmtpClient/src/emailaddress.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o smtpclient.o SmtpClient/src/smtpclient.cpp
-
-mimetext.o: SmtpClient/src/mimetext.cpp SmtpClient/src/mimetext.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimepart.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimetext.o SmtpClient/src/mimetext.cpp
-
-mimepart.o: SmtpClient/src/mimepart.cpp SmtpClient/src/mimepart.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/quotedprintable.h \
-		SmtpClient/src/mimebase64formatter.h \
-		SmtpClient/src/mimecontentformatter.h \
-		SmtpClient/src/mimeqpformatter.h \
-		SmtpClient/src/mimebase64encoder.h \
-		SmtpClient/src/mimecontentencoder.h \
-		SmtpClient/src/mimeqpencoder.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimepart.o SmtpClient/src/mimepart.cpp
-
-mimemessage.o: SmtpClient/src/mimemessage.cpp SmtpClient/src/mimemessage.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimepart.h \
-		SmtpClient/src/mimemultipart.h \
-		SmtpClient/src/emailaddress.h \
-		SmtpClient/src/quotedprintable.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimemessage.o SmtpClient/src/mimemessage.cpp
-
-emailaddress.o: SmtpClient/src/emailaddress.cpp SmtpClient/src/emailaddress.h \
-		SmtpClient/src/smtpmime_global.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o emailaddress.o SmtpClient/src/emailaddress.cpp
-
-mimeattachment.o: SmtpClient/src/mimeattachment.cpp SmtpClient/src/mimeattachment.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimepart.h \
-		SmtpClient/src/mimefile.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimeattachment.o SmtpClient/src/mimeattachment.cpp
-
-mimebase64encoder.o: SmtpClient/src/mimebase64encoder.cpp SmtpClient/src/mimebase64encoder.h \
-		SmtpClient/src/mimecontentencoder.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimebase64encoder.o SmtpClient/src/mimebase64encoder.cpp
-
-mimebase64formatter.o: SmtpClient/src/mimebase64formatter.cpp SmtpClient/src/mimebase64formatter.h \
-		SmtpClient/src/mimecontentformatter.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimebase64formatter.o SmtpClient/src/mimebase64formatter.cpp
-
-mimebytearrayattachment.o: SmtpClient/src/mimebytearrayattachment.cpp SmtpClient/src/mimebytearrayattachment.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimepart.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimebytearrayattachment.o SmtpClient/src/mimebytearrayattachment.cpp
-
-mimecontentencoder.o: SmtpClient/src/mimecontentencoder.cpp SmtpClient/src/mimecontentencoder.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimecontentencoder.o SmtpClient/src/mimecontentencoder.cpp
-
-mimecontentformatter.o: SmtpClient/src/mimecontentformatter.cpp SmtpClient/src/mimecontentformatter.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimecontentformatter.o SmtpClient/src/mimecontentformatter.cpp
-
-mimefile.o: SmtpClient/src/mimefile.cpp SmtpClient/src/mimefile.h \
-		SmtpClient/src/mimepart.h \
-		SmtpClient/src/smtpmime_global.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimefile.o SmtpClient/src/mimefile.cpp
-
-mimehtml.o: SmtpClient/src/mimehtml.cpp SmtpClient/src/mimehtml.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimetext.h \
-		SmtpClient/src/mimepart.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimehtml.o SmtpClient/src/mimehtml.cpp
-
-mimeinlinefile.o: SmtpClient/src/mimeinlinefile.cpp SmtpClient/src/mimeinlinefile.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimefile.h \
-		SmtpClient/src/mimepart.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimeinlinefile.o SmtpClient/src/mimeinlinefile.cpp
-
-mimemultipart.o: SmtpClient/src/mimemultipart.cpp SmtpClient/src/mimemultipart.h \
-		SmtpClient/src/smtpmime_global.h \
-		SmtpClient/src/mimepart.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimemultipart.o SmtpClient/src/mimemultipart.cpp
-
-mimeqpencoder.o: SmtpClient/src/mimeqpencoder.cpp SmtpClient/src/mimeqpencoder.h \
-		SmtpClient/src/mimecontentencoder.h \
-		SmtpClient/src/quotedprintable.h \
-		SmtpClient/src/smtpmime_global.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimeqpencoder.o SmtpClient/src/mimeqpencoder.cpp
-
-mimeqpformatter.o: SmtpClient/src/mimeqpformatter.cpp SmtpClient/src/mimeqpformatter.h \
-		SmtpClient/src/mimecontentformatter.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mimeqpformatter.o SmtpClient/src/mimeqpformatter.cpp
-
-quotedprintable.o: SmtpClient/src/quotedprintable.cpp SmtpClient/src/quotedprintable.h \
-		SmtpClient/src/smtpmime_global.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o quotedprintable.o SmtpClient/src/quotedprintable.cpp
 
 moc_echoclient.o: moc_echoclient.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_echoclient.o moc_echoclient.cpp
-
-moc_smtpclient.o: moc_smtpclient.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_smtpclient.o moc_smtpclient.cpp
-
-moc_mimecontentformatter.o: moc_mimecontentformatter.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mimecontentformatter.o moc_mimecontentformatter.cpp
 
 ####### Install
 
