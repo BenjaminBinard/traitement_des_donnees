@@ -1,0 +1,163 @@
+\hypertarget{classsql_1_1mysql_1_1MySQL__Connection}{}\section{Référence de la classe sql\+:\+:mysql\+:\+:My\+S\+Q\+L\+\_\+\+Connection}
+\label{classsql_1_1mysql_1_1MySQL__Connection}\index{sql\+::mysql\+::\+My\+S\+Q\+L\+\_\+\+Connection@{sql\+::mysql\+::\+My\+S\+Q\+L\+\_\+\+Connection}}
+
+
+Graphe d\textquotesingle{}héritage de sql\+:\+:mysql\+:\+:My\+S\+Q\+L\+\_\+\+Connection\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{classsql_1_1mysql_1_1MySQL__Connection__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Graphe de collaboration de sql\+:\+:mysql\+:\+:My\+S\+Q\+L\+\_\+\+Connection\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{classsql_1_1mysql_1_1MySQL__Connection__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries My\+S\+Q\+L\+\_\+\+Connection} (Driver $\ast$\+\_\+driver,\+::sql\+::mysql\+::\+Native\+A\+P\+I\+::\+Native\+Connection\+Wrapper \&\+\_\+proxy, const sql\+::\+S\+Q\+L\+String \&host\+Name, const sql\+::\+S\+Q\+L\+String \&user\+Name, const sql\+::\+S\+Q\+L\+String \&password)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_ac416ee488b73f8d76e3a06388221a129}{}\label{classsql_1_1mysql_1_1MySQL__Connection_ac416ee488b73f8d76e3a06388221a129}
+
+\item 
+{\bfseries My\+S\+Q\+L\+\_\+\+Connection} (Driver $\ast$\+\_\+driver,\+::sql\+::mysql\+::\+Native\+A\+P\+I\+::\+Native\+Connection\+Wrapper \&\+\_\+proxy, std\+::map$<$ sql\+::\+S\+Q\+L\+String, sql\+::\+Connect\+Property\+Val $>$ \&options)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a4365bfd56d803258f9ed47d95eafaf56}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a4365bfd56d803258f9ed47d95eafaf56}
+
+\item 
+void {\bfseries clear\+Warnings} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_aa792ed9b722ec4b45842872865fcc1d9}{}\label{classsql_1_1mysql_1_1MySQL__Connection_aa792ed9b722ec4b45842872865fcc1d9}
+
+\item 
+void {\bfseries close} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_aa8d0be382f89bfe031d276a2c67bb7fb}{}\label{classsql_1_1mysql_1_1MySQL__Connection_aa8d0be382f89bfe031d276a2c67bb7fb}
+
+\item 
+void {\bfseries commit} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_aca3dab58cd10c2bd877fadc2fa7b9b3f}{}\label{classsql_1_1mysql_1_1MySQL__Connection_aca3dab58cd10c2bd877fadc2fa7b9b3f}
+
+\item 
+sql\+::\+Statement $\ast$ {\bfseries create\+Statement} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a65dd9ce62b91f6ee7422bf6acaa6dc59}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a65dd9ce62b91f6ee7422bf6acaa6dc59}
+
+\item 
+sql\+::\+S\+Q\+L\+String {\bfseries escape\+String} (const sql\+::\+S\+Q\+L\+String \&)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a4ab19794fc96f0b771dc7f3a9b89d445}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a4ab19794fc96f0b771dc7f3a9b89d445}
+
+\item 
+bool {\bfseries get\+Auto\+Commit} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_aa8a7c0dfd9b9dd7f8c00c43fefa2f8a4}{}\label{classsql_1_1mysql_1_1MySQL__Connection_aa8a7c0dfd9b9dd7f8c00c43fefa2f8a4}
+
+\item 
+sql\+::\+S\+Q\+L\+String {\bfseries get\+Catalog} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_af410a283060804936031001d38f89e9b}{}\label{classsql_1_1mysql_1_1MySQL__Connection_af410a283060804936031001d38f89e9b}
+
+\item 
+Driver $\ast$ {\bfseries get\+Driver} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_af4aaa6f7a2564e6cd7b259a24fe8f0ef}{}\label{classsql_1_1mysql_1_1MySQL__Connection_af4aaa6f7a2564e6cd7b259a24fe8f0ef}
+
+\item 
+sql\+::\+S\+Q\+L\+String {\bfseries get\+Schema} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a49bf51d2c4586f8f85c362a6c71cf8b6}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a49bf51d2c4586f8f85c362a6c71cf8b6}
+
+\item 
+sql\+::\+S\+Q\+L\+String {\bfseries get\+Client\+Info} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_aa94814c22d27fae1f62f8a077619026c}{}\label{classsql_1_1mysql_1_1MySQL__Connection_aa94814c22d27fae1f62f8a077619026c}
+
+\item 
+void {\bfseries get\+Client\+Option} (const sql\+::\+S\+Q\+L\+String \&option\+Name, void $\ast$option\+Value)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a0c80ccabb9723fc4e7bcbe1fac2b7cbf}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a0c80ccabb9723fc4e7bcbe1fac2b7cbf}
+
+\item 
+sql\+::\+S\+Q\+L\+String {\bfseries get\+Client\+Option} (const sql\+::\+S\+Q\+L\+String \&option\+Name)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a6aa6995181dd5acfa0c18ec7917d2d02}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a6aa6995181dd5acfa0c18ec7917d2d02}
+
+\item 
+sql\+::\+Database\+Meta\+Data $\ast$ {\bfseries get\+Meta\+Data} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a5fcfd3fa9932acb64c36d49c0e264e95}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a5fcfd3fa9932acb64c36d49c0e264e95}
+
+\item 
+enum\+\_\+transaction\+\_\+isolation {\bfseries get\+Transaction\+Isolation} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a556dcab3c0deb14fde548a270d9168ad}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a556dcab3c0deb14fde548a270d9168ad}
+
+\item 
+const S\+Q\+L\+Warning $\ast$ {\bfseries get\+Warnings} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a62b556bf59e83dae5bafd52cce4801a7}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a62b556bf59e83dae5bafd52cce4801a7}
+
+\item 
+bool {\bfseries is\+Closed} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a00820cf65fea6a9fd9cb936a6781db33}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a00820cf65fea6a9fd9cb936a6781db33}
+
+\item 
+bool {\bfseries is\+Read\+Only} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_af395e4c12315d0dcf9e3a5abbcbb33e2}{}\label{classsql_1_1mysql_1_1MySQL__Connection_af395e4c12315d0dcf9e3a5abbcbb33e2}
+
+\item 
+bool {\bfseries is\+Valid} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a081337e746b0eabcf0a7cb136b50277b}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a081337e746b0eabcf0a7cb136b50277b}
+
+\item 
+bool {\bfseries reconnect} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a19ebafbbc4bc37958bcc93c7fa0807e9}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a19ebafbbc4bc37958bcc93c7fa0807e9}
+
+\item 
+sql\+::\+S\+Q\+L\+String {\bfseries native\+S\+QL} (const sql\+::\+S\+Q\+L\+String \&sql)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a7242075ae362ec3fbe65194f7043abc4}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a7242075ae362ec3fbe65194f7043abc4}
+
+\item 
+sql\+::\+Prepared\+Statement $\ast$ {\bfseries prepare\+Statement} (const sql\+::\+S\+Q\+L\+String \&sql)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a5d4ab19b238692240183b849c84c2166}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a5d4ab19b238692240183b849c84c2166}
+
+\item 
+sql\+::\+Prepared\+Statement $\ast$ {\bfseries prepare\+Statement} (const sql\+::\+S\+Q\+L\+String \&sql, int auto\+Generated\+Keys)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a4b341cf31b1fadb55fa573d5fc570de7}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a4b341cf31b1fadb55fa573d5fc570de7}
+
+\item 
+sql\+::\+Prepared\+Statement $\ast$ {\bfseries prepare\+Statement} (const sql\+::\+S\+Q\+L\+String \&sql, int column\+Indexes\mbox{[}$\,$\mbox{]})\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a02a26ce23b897f09189ddafd4b87849e}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a02a26ce23b897f09189ddafd4b87849e}
+
+\item 
+sql\+::\+Prepared\+Statement $\ast$ {\bfseries prepare\+Statement} (const sql\+::\+S\+Q\+L\+String \&sql, int result\+Set\+Type, int result\+Set\+Concurrency)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_afcddea07aca0542a2a6e814ba1ee4bd6}{}\label{classsql_1_1mysql_1_1MySQL__Connection_afcddea07aca0542a2a6e814ba1ee4bd6}
+
+\item 
+sql\+::\+Prepared\+Statement $\ast$ {\bfseries prepare\+Statement} (const sql\+::\+S\+Q\+L\+String \&sql, int result\+Set\+Type, int result\+Set\+Concurrency, int result\+Set\+Holdability)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a156ab360753b8b1ca11682422d9914b3}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a156ab360753b8b1ca11682422d9914b3}
+
+\item 
+sql\+::\+Prepared\+Statement $\ast$ {\bfseries prepare\+Statement} (const sql\+::\+S\+Q\+L\+String \&sql, sql\+::\+S\+Q\+L\+String column\+Names\mbox{[}$\,$\mbox{]})\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a27a07ce9777574a0592fe6f8834e082f}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a27a07ce9777574a0592fe6f8834e082f}
+
+\item 
+void {\bfseries release\+Savepoint} (Savepoint $\ast$savepoint)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_af85e740e1d7cc9f16d357afdd9f4419d}{}\label{classsql_1_1mysql_1_1MySQL__Connection_af85e740e1d7cc9f16d357afdd9f4419d}
+
+\item 
+void {\bfseries rollback} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a30102a74e65a62cff9c36ce77a8c7f44}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a30102a74e65a62cff9c36ce77a8c7f44}
+
+\item 
+void {\bfseries rollback} (Savepoint $\ast$savepoint)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a64fc3a6f403a19fee712142141a07ef4}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a64fc3a6f403a19fee712142141a07ef4}
+
+\item 
+void {\bfseries set\+Auto\+Commit} (bool auto\+Commit)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a66dd8515ee9ccfe186fc1d2b597f220f}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a66dd8515ee9ccfe186fc1d2b597f220f}
+
+\item 
+void {\bfseries set\+Catalog} (const sql\+::\+S\+Q\+L\+String \&catalog)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a85487982563f163064269bbe072bf2a0}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a85487982563f163064269bbe072bf2a0}
+
+\item 
+void {\bfseries set\+Schema} (const sql\+::\+S\+Q\+L\+String \&catalog)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_ae9c04f366688e047e898487bc6fd6e1b}{}\label{classsql_1_1mysql_1_1MySQL__Connection_ae9c04f366688e047e898487bc6fd6e1b}
+
+\item 
+sql\+::\+Connection $\ast$ {\bfseries set\+Client\+Option} (const sql\+::\+S\+Q\+L\+String \&option\+Name, const void $\ast$option\+Value)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a146973ddeaf89e344b719cefb09c55ad}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a146973ddeaf89e344b719cefb09c55ad}
+
+\item 
+sql\+::\+Connection $\ast$ {\bfseries set\+Client\+Option} (const sql\+::\+S\+Q\+L\+String \&option\+Name, const sql\+::\+S\+Q\+L\+String \&option\+Value)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a2e01fff22d660d797501ac29e9a436e7}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a2e01fff22d660d797501ac29e9a436e7}
+
+\item 
+void {\bfseries set\+Holdability} (int holdability)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a4703a47ce23ba73ec2fadfc680b2e868}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a4703a47ce23ba73ec2fadfc680b2e868}
+
+\item 
+void {\bfseries set\+Read\+Only} (bool read\+Only)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_ac4bafbedfb801fa73694ddbfca4a95c6}{}\label{classsql_1_1mysql_1_1MySQL__Connection_ac4bafbedfb801fa73694ddbfca4a95c6}
+
+\item 
+sql\+::\+Savepoint $\ast$ {\bfseries set\+Savepoint} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_afca8998459c9f06788b3ed3be25b81de}{}\label{classsql_1_1mysql_1_1MySQL__Connection_afca8998459c9f06788b3ed3be25b81de}
+
+\item 
+sql\+::\+Savepoint $\ast$ {\bfseries set\+Savepoint} (const sql\+::\+S\+Q\+L\+String \&name)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a2d0045db252b83fd0222e716f9bfc71d}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a2d0045db252b83fd0222e716f9bfc71d}
+
+\item 
+void {\bfseries set\+Transaction\+Isolation} (enum\+\_\+transaction\+\_\+isolation level)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a50c5f85205c2333804ee503778ed05b0}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a50c5f85205c2333804ee503778ed05b0}
+
+\item 
+virtual sql\+::\+S\+Q\+L\+String {\bfseries get\+Session\+Variable} (const sql\+::\+S\+Q\+L\+String \&varname)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_ae35fdfcee5de39dc2ec759bc5b8145be}{}\label{classsql_1_1mysql_1_1MySQL__Connection_ae35fdfcee5de39dc2ec759bc5b8145be}
+
+\item 
+virtual void {\bfseries set\+Session\+Variable} (const sql\+::\+S\+Q\+L\+String \&varname, const sql\+::\+S\+Q\+L\+String \&value)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a5e3eb3eed3d7092c9d03efd7d52629c2}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a5e3eb3eed3d7092c9d03efd7d52629c2}
+
+\item 
+virtual void {\bfseries set\+Session\+Variable} (const sql\+::\+S\+Q\+L\+String \&varname, unsigned int value)\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_ad8a42ed4da0fb3810a7624cc969d7ced}{}\label{classsql_1_1mysql_1_1MySQL__Connection_ad8a42ed4da0fb3810a7624cc969d7ced}
+
+\item 
+virtual sql\+::\+S\+Q\+L\+String {\bfseries get\+Last\+Statement\+Info} ()\hypertarget{classsql_1_1mysql_1_1MySQL__Connection_a31744f8fd6beaa9c488f947962c1bae6}{}\label{classsql_1_1mysql_1_1MySQL__Connection_a31744f8fd6beaa9c488f947962c1bae6}
+
+\end{DoxyCompactItemize}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+mysql\+\_\+connection.\+h\end{DoxyCompactItemize}

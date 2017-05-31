@@ -36,7 +36,7 @@ DISTNAME      = echoclient1.0.0
 DISTDIR = /var/www/html/projet_cir2/echo_client/.tmp/echoclient1.0.0
 LINK          = g++
 LFLAGS        = -m64 -Wl,-O1
-LIBS          = $(SUBLIBS) -L/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/lib/ -lmysqlcppconn -L/var/www/html/projet_cir2/echo_client/SmtpClient/src/SmtpMime -lQt5WebSockets -lQt5Network -lQt5Core -lpthread 
+LIBS          = $(SUBLIBS) -L/var/www/html/projet_cir2/echo_client/mysql-connector-cpp/lib/ -lmysqlcppconn -lQt5WebSockets -lQt5Network -lQt5Core -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -371,8 +371,7 @@ main.o: main.cpp echoclient.h \
 		cppconn/resultset_metadata.h \
 		cppconn/datatype.h \
 		cppconn/statement.h \
-		cppconn/prepared_statement.h \
-		conversion.h
+		cppconn/prepared_statement.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 echoclient.o: echoclient.cpp echoclient.h \

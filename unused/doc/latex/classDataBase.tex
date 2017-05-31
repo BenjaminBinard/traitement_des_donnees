@@ -1,0 +1,172 @@
+\hypertarget{classDataBase}{}\section{Référence de la classe Data\+Base}
+\label{classDataBase}\index{Data\+Base@{Data\+Base}}
+
+
+La classe {\bfseries \hyperlink{classDataBase}{Data\+Base}} sert à intéragir avec la base de données.  
+
+
+
+
+{\ttfamily \#include $<$database.\+h$>$}
+
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDataBase_a58bcabfc07dc77eb0fc35d27523f3e9f}{Data\+Base} (string path, string login, string pass, Q\+String time, int temperature, int humidite, Q\+String user, Q\+String four, double C\+O2, int chute, Q\+String tv, Q\+String pas, string id\+\_\+room)
+\begin{DoxyCompactList}\small\item\em Le constructeur de la classe {\bfseries \hyperlink{classDataBase}{Data\+Base}}. \end{DoxyCompactList}\item 
+void \hyperlink{classDataBase_a65ad879d829e20db4a78719e62c8356e}{Comparaison} (string path, string login, string pass, Q\+String time, int temperature, int humidite, Q\+String user, Q\+String four, double C\+O2, int chute, Q\+String tv, string id\+\_\+room)
+\item 
+void \hyperlink{classDataBase_aa1c151b2f7d0adb2a2a7a692db65e3f4}{create\+Alert} (string path, string login, string pass, Q\+String user, Q\+String time, int type, int sens\+Depassement, int value, string id\+\_\+room)
+\begin{DoxyCompactList}\small\item\em Cette méthode peut être appelée par {\bfseries \hyperlink{classDataBase_a65ad879d829e20db4a78719e62c8356e}{Comparaison()}} dans la cas de dépassement d\textquotesingle{}un seuil. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+La classe {\bfseries \hyperlink{classDataBase}{Data\+Base}} sert à intéragir avec la base de données. 
+
+Ses fonctionnalités consistent à envoyer les valeurs reçues et traitées dans {\bfseries \hyperlink{classEchoClient}{Echo\+Client}} dans la base de données, mais aussi à récupérer les données de seuils pour les comparer avec les valeurs de la trame actuelle. Si un dépassement est constaté, une alerte sera créée et envoyée dans l\textquotesingle{}entité correspondante de la base de données. \begin{DoxyRefDesc}{Bogue}
+\item[\hyperlink{bug__bug000001}{Bogue}]L\textquotesingle{}envoi de mails aurait pû faire l\textquotesingle{}objet d\textquotesingle{}une méthode de cette classe mais la bibliotheque choisie n\textquotesingle{}a pas permis cela. \end{DoxyRefDesc}
+
+
+\subsection{Documentation des constructeurs et destructeur}
+\index{Data\+Base@{Data\+Base}!Data\+Base@{Data\+Base}}
+\index{Data\+Base@{Data\+Base}!Data\+Base@{Data\+Base}}
+\subsubsection[{\texorpdfstring{Data\+Base(string path, string login, string pass, Q\+String time, int temperature, int humidite, Q\+String user, Q\+String four, double C\+O2, int chute, Q\+String tv, Q\+String pas, string id\+\_\+room)}{DataBase(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv, QString pas, string id_room)}}]{\setlength{\rightskip}{0pt plus 5cm}Data\+Base\+::\+Data\+Base (
+\begin{DoxyParamCaption}
+\item[{string}]{path, }
+\item[{string}]{login, }
+\item[{string}]{pass, }
+\item[{Q\+String}]{time, }
+\item[{int}]{temperature, }
+\item[{int}]{humidite, }
+\item[{Q\+String}]{user, }
+\item[{Q\+String}]{four, }
+\item[{double}]{C\+O2, }
+\item[{int}]{chute, }
+\item[{Q\+String}]{tv, }
+\item[{Q\+String}]{pas, }
+\item[{string}]{id\+\_\+room}
+\end{DoxyParamCaption}
+)}\hypertarget{classDataBase_a58bcabfc07dc77eb0fc35d27523f3e9f}{}\label{classDataBase_a58bcabfc07dc77eb0fc35d27523f3e9f}
+
+
+Le constructeur de la classe {\bfseries \hyperlink{classDataBase}{Data\+Base}}. 
+
+En fonction des données qui lui sont transmises, il remplira l\textquotesingle{}entité {\bfseries V\+A\+L\+UE} de la base de données. Si les quatres valeurs numériques de la trame des chambres sont à 0, il va gérer les données utilisateur (nombre de pas...) Dans le cas contraire, ce sont les données des chambres qui lui sont envoyées. Dans les deux cas, une requête I\+N\+S\+E\+RT I\+N\+TO V\+A\+L\+UE(...) V\+A\+L\+U\+ES(...) sera envoyée à la base de données. 
+\begin{DoxyParams}{Paramètres}
+{\em path} & L\textquotesingle{}adresse de la base de données. \\
+\hline
+{\em login} & L\textquotesingle{}identifiant pour se connecter à al base de données. \\
+\hline
+{\em pass} & Le mot de passe pour se connecter à la base de données. \\
+\hline
+{\em time} & La date et l\textquotesingle{}heure \\
+\hline
+{\em temperature} & La valeur de la temperature. \\
+\hline
+{\em humidite} & La valeur de l\textquotesingle{}humidité en \% \\
+\hline
+{\em user} & L\textquotesingle{}adresse mail de l\textquotesingle{}utilisateur de la pièce. \\
+\hline
+{\em four} & La valeur associée à la mise en marche du four. \\
+\hline
+{\em C\+O2} & La valeur du taux de C\+O2 en ppm. \\
+\hline
+{\em chute} & La valeur associée à l\textquotesingle{}éventuelle chute de l\textquotesingle{}utilisateur \\
+\hline
+{\em tv} & La valeur associée à l\textquotesingle{}allumage de la télévision \\
+\hline
+{\em pas} & Le nombre de pas effectués par l\textquotesingle{}utilisateur pendant la dernière heure. \\
+\hline
+{\em id\+\_\+room} & Le numero de la pièce. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Documentation des fonctions membres}
+\index{Data\+Base@{Data\+Base}!Comparaison@{Comparaison}}
+\index{Comparaison@{Comparaison}!Data\+Base@{Data\+Base}}
+\subsubsection[{\texorpdfstring{Comparaison(string path, string login, string pass, Q\+String time, int temperature, int humidite, Q\+String user, Q\+String four, double C\+O2, int chute, Q\+String tv, string id\+\_\+room)}{Comparaison(string path, string login, string pass, QString time, int temperature, int humidite, QString user, QString four, double CO2, int chute, QString tv, string id_room)}}]{\setlength{\rightskip}{0pt plus 5cm}Data\+Base\+::\+Comparaison (
+\begin{DoxyParamCaption}
+\item[{string}]{path, }
+\item[{string}]{login, }
+\item[{string}]{pass, }
+\item[{Q\+String}]{time, }
+\item[{int}]{temperature, }
+\item[{int}]{humidite, }
+\item[{Q\+String}]{user, }
+\item[{Q\+String}]{four, }
+\item[{double}]{C\+O2, }
+\item[{int}]{chute, }
+\item[{Q\+String}]{tv, }
+\item[{string}]{id\+\_\+room}
+\end{DoxyParamCaption}
+)}\hypertarget{classDataBase_a65ad879d829e20db4a78719e62c8356e}{}\label{classDataBase_a65ad879d829e20db4a78719e62c8356e}
+Cette méthode consiste à envoyer une requête S\+E\+L\+E\+CT ... F\+R\+OM ... W\+H\+E\+RE pour récupérer les seuils propres à chaque capteur. Les valeurs passées en paramètres sont ensuite comparées avec leurs seuils respectifs, dès qu\textquotesingle{}un dépassement est constaté, un appel est lancé à la méthode \hyperlink{classDataBase_aa1c151b2f7d0adb2a2a7a692db65e3f4}{create\+Alert()}. 
+\begin{DoxyParams}{Paramètres}
+{\em path} & L\textquotesingle{}adresse de la base de données. \\
+\hline
+{\em login} & L\textquotesingle{}identifiant pour se connecter à al base de données. \\
+\hline
+{\em pass} & Le mot de passe pour se connecter à la base de données. \\
+\hline
+{\em time} & La date et l\textquotesingle{}heure. \\
+\hline
+{\em temperature} & La valeur de la temperature. \\
+\hline
+{\em humidite} & La valeur de l\textquotesingle{}humidité en \%. \\
+\hline
+{\em user} & L\textquotesingle{}adresse mail de l\textquotesingle{}utilisateur de la pièce. \\
+\hline
+{\em four} & La valeur associée à la mise en marche du four. \\
+\hline
+{\em C\+O2} & La valeur du taux de C\+O2 en ppm. \\
+\hline
+{\em chute} & La valeur associée à l\textquotesingle{}éventuelle chute de l\textquotesingle{}utilisateur. \\
+\hline
+{\em tv} & La valeur associée à l\textquotesingle{}allumage de la télévision. \\
+\hline
+\end{DoxyParams}
+\index{Data\+Base@{Data\+Base}!create\+Alert@{create\+Alert}}
+\index{create\+Alert@{create\+Alert}!Data\+Base@{Data\+Base}}
+\subsubsection[{\texorpdfstring{create\+Alert(string path, string login, string pass, Q\+String user, Q\+String time, int type, int sens\+Depassement, int value, string id\+\_\+room)}{createAlert(string path, string login, string pass, QString user, QString time, int type, int sensDepassement, int value, string id_room)}}]{\setlength{\rightskip}{0pt plus 5cm}Data\+Base\+::create\+Alert (
+\begin{DoxyParamCaption}
+\item[{string}]{path, }
+\item[{string}]{login, }
+\item[{string}]{pass, }
+\item[{Q\+String}]{user, }
+\item[{Q\+String}]{time, }
+\item[{int}]{type, }
+\item[{int}]{sens\+Depassement, }
+\item[{int}]{value, }
+\item[{string}]{id\+\_\+room}
+\end{DoxyParamCaption}
+)}\hypertarget{classDataBase_aa1c151b2f7d0adb2a2a7a692db65e3f4}{}\label{classDataBase_aa1c151b2f7d0adb2a2a7a692db65e3f4}
+
+
+Cette méthode peut être appelée par {\bfseries \hyperlink{classDataBase_a65ad879d829e20db4a78719e62c8356e}{Comparaison()}} dans la cas de dépassement d\textquotesingle{}un seuil. 
+
+En fonction du type d\textquotesingle{}alerte (ou plutôt du capteur qui la déclenche), la description de l\textquotesingle{}alerte changera. une requête I\+N\+S\+E\+RT I\+N\+TO est ensuite envoyée pour ajouter les données liées à l\textquotesingle{}alerte dans l\textquotesingle{}entité A\+L\+E\+R\+TE de la base de données. 
+\begin{DoxyParams}{Paramètres}
+{\em path} & L\textquotesingle{}adresse de la base de données. \\
+\hline
+{\em login} & L\textquotesingle{}identifiant pour se connecter à al base de données. \\
+\hline
+{\em pass} & Le mot de passe pour se connecter à la base de données. \\
+\hline
+{\em time} & La date et l\textquotesingle{}heure. \\
+\hline
+{\em type} & Le type de capteur concerné. \\
+\hline
+{\em sens\+Depassement} & Une variable qui permet de savoir si c\textquotesingle{}est le seuil haut ou bas qui a été dépassé. \\
+\hline
+{\em value} & La valeur envoyée par le capteur. \\
+\hline
+{\em id\+\_\+room} & Le numero de la pièce. \\
+\hline
+\end{DoxyParams}
+
+
+La documentation de cette classe a été générée à partir des fichiers suivants \+:\begin{DoxyCompactItemize}
+\item 
+database.\+h\item 
+\hyperlink{database_8cpp}{database.\+cpp}\end{DoxyCompactItemize}

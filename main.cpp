@@ -6,11 +6,10 @@
 #include <QtCore/QCommandLineParser>
 #include <QtCore/QCommandLineOption>
 #include "echoclient.h"
-#include "conversion.h"
 
 /**
 * \fn fonction main
-* Le premier test verifie que l'addresse IP et le Port sur lesquels écouter son entrés au lancement du programme.
+* \details Le premier test verifie que l'addresse IP et le Port sur lesquels écouter son entrés au lancement du programme.
 * Il s'agit ensuite de préparer l'url totale (avec l'IP et le Port) et de créer une instance de notre EchoClient.
 */
 int main(int argc, char *argv[])
@@ -18,6 +17,7 @@ int main(int argc, char *argv[])
 	if (argv[1] == NULL || argv[2] == NULL/* || argv[3] == NULL*/)
 	{
 		cout << "Pour lancer correctement le programme tapez './NomDuProgramme AddresseIpTrame PortChambre ou PortUtilisateur'" << endl;
+		cout << "(Par exemple : ./echoclient 192.168.199.30 1000)" << endl;
 		return 1;
 	}
 
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 		qDebug() << url << endl;
 		/*qDebug() << url2 << endl;*/
 
-    EchoClient client(QUrl(url),/* QUrl(url2),*/ debug);
+    EchoClient client(QUrl(url), debug);
 		//EchoClient client(QUrl(QStringLiteral()), debug);
 		//"ws://192.168.199.30:1000"
 		//bdd : 127.0.0.1 3306 equipe toor

@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>ProjetCIR2:monitoring: Référence de la classe sql::mysql::MySQL_Connection</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">ProjetCIR2:monitoring
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="pages.html"><span>Pages&#160;associées</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Liste&#160;des&#160;classes</span></a></li>
+      <li><a href="classes.html"><span>Index&#160;des&#160;classes</span></a></li>
+      <li><a href="inherits.html"><span>Hiérarchie&#160;des&#160;classes</span></a></li>
+      <li><a href="functions.html"><span>Membres&#160;de&#160;classe</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><b>sql</b></li><li class="navelem"><b>mysql</b></li><li class="navelem"><a class="el" href="classsql_1_1mysql_1_1MySQL__Connection.html">MySQL_Connection</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Fonctions membres publiques</a> &#124;
+<a href="classsql_1_1mysql_1_1MySQL__Connection-members.html">Liste de tous les membres</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence de la classe sql::mysql::MySQL_Connection</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Graphe d'héritage de sql::mysql::MySQL_Connection:</div>
+<div class="dyncontent">
+<div class="center"><img src="classsql_1_1mysql_1_1MySQL__Connection__inherit__graph.png" border="0" usemap="#sql_1_1mysql_1_1MySQL__Connection_inherit__map" alt="Inheritance graph"/></div>
+<center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
+<div class="dynheader">
+Graphe de collaboration de sql::mysql::MySQL_Connection:</div>
+<div class="dyncontent">
+<div class="center"><img src="classsql_1_1mysql_1_1MySQL__Connection__coll__graph.png" border="0" usemap="#sql_1_1mysql_1_1MySQL__Connection_coll__map" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Fonctions membres publiques</h2></td></tr>
+<tr class="memitem:ac416ee488b73f8d76e3a06388221a129"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac416ee488b73f8d76e3a06388221a129"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MySQL_Connection</b> (Driver *_driver,::sql::mysql::NativeAPI::NativeConnectionWrapper &amp;_proxy, const sql::SQLString &amp;hostName, const sql::SQLString &amp;userName, const sql::SQLString &amp;password)</td></tr>
+<tr class="separator:ac416ee488b73f8d76e3a06388221a129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4365bfd56d803258f9ed47d95eafaf56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4365bfd56d803258f9ed47d95eafaf56"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MySQL_Connection</b> (Driver *_driver,::sql::mysql::NativeAPI::NativeConnectionWrapper &amp;_proxy, std::map&lt; sql::SQLString, sql::ConnectPropertyVal &gt; &amp;options)</td></tr>
+<tr class="separator:a4365bfd56d803258f9ed47d95eafaf56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa792ed9b722ec4b45842872865fcc1d9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa792ed9b722ec4b45842872865fcc1d9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clearWarnings</b> ()</td></tr>
+<tr class="separator:aa792ed9b722ec4b45842872865fcc1d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8d0be382f89bfe031d276a2c67bb7fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8d0be382f89bfe031d276a2c67bb7fb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
+<tr class="separator:aa8d0be382f89bfe031d276a2c67bb7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca3dab58cd10c2bd877fadc2fa7b9b3f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca3dab58cd10c2bd877fadc2fa7b9b3f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>commit</b> ()</td></tr>
+<tr class="separator:aca3dab58cd10c2bd877fadc2fa7b9b3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65dd9ce62b91f6ee7422bf6acaa6dc59"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65dd9ce62b91f6ee7422bf6acaa6dc59"></a>
+sql::Statement *&#160;</td><td class="memItemRight" valign="bottom"><b>createStatement</b> ()</td></tr>
+<tr class="separator:a65dd9ce62b91f6ee7422bf6acaa6dc59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ab19794fc96f0b771dc7f3a9b89d445"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ab19794fc96f0b771dc7f3a9b89d445"></a>
+sql::SQLString&#160;</td><td class="memItemRight" valign="bottom"><b>escapeString</b> (const sql::SQLString &amp;)</td></tr>
+<tr class="separator:a4ab19794fc96f0b771dc7f3a9b89d445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8a7c0dfd9b9dd7f8c00c43fefa2f8a4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8a7c0dfd9b9dd7f8c00c43fefa2f8a4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>getAutoCommit</b> ()</td></tr>
+<tr class="separator:aa8a7c0dfd9b9dd7f8c00c43fefa2f8a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af410a283060804936031001d38f89e9b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af410a283060804936031001d38f89e9b"></a>
+sql::SQLString&#160;</td><td class="memItemRight" valign="bottom"><b>getCatalog</b> ()</td></tr>
+<tr class="separator:af410a283060804936031001d38f89e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4aaa6f7a2564e6cd7b259a24fe8f0ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4aaa6f7a2564e6cd7b259a24fe8f0ef"></a>
+Driver *&#160;</td><td class="memItemRight" valign="bottom"><b>getDriver</b> ()</td></tr>
+<tr class="separator:af4aaa6f7a2564e6cd7b259a24fe8f0ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49bf51d2c4586f8f85c362a6c71cf8b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49bf51d2c4586f8f85c362a6c71cf8b6"></a>
+sql::SQLString&#160;</td><td class="memItemRight" valign="bottom"><b>getSchema</b> ()</td></tr>
+<tr class="separator:a49bf51d2c4586f8f85c362a6c71cf8b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa94814c22d27fae1f62f8a077619026c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa94814c22d27fae1f62f8a077619026c"></a>
+sql::SQLString&#160;</td><td class="memItemRight" valign="bottom"><b>getClientInfo</b> ()</td></tr>
+<tr class="separator:aa94814c22d27fae1f62f8a077619026c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c80ccabb9723fc4e7bcbe1fac2b7cbf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c80ccabb9723fc4e7bcbe1fac2b7cbf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>getClientOption</b> (const sql::SQLString &amp;optionName, void *optionValue)</td></tr>
+<tr class="separator:a0c80ccabb9723fc4e7bcbe1fac2b7cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aa6995181dd5acfa0c18ec7917d2d02"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6aa6995181dd5acfa0c18ec7917d2d02"></a>
+sql::SQLString&#160;</td><td class="memItemRight" valign="bottom"><b>getClientOption</b> (const sql::SQLString &amp;optionName)</td></tr>
+<tr class="separator:a6aa6995181dd5acfa0c18ec7917d2d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fcfd3fa9932acb64c36d49c0e264e95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5fcfd3fa9932acb64c36d49c0e264e95"></a>
+sql::DatabaseMetaData *&#160;</td><td class="memItemRight" valign="bottom"><b>getMetaData</b> ()</td></tr>
+<tr class="separator:a5fcfd3fa9932acb64c36d49c0e264e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a556dcab3c0deb14fde548a270d9168ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a556dcab3c0deb14fde548a270d9168ad"></a>
+enum_transaction_isolation&#160;</td><td class="memItemRight" valign="bottom"><b>getTransactionIsolation</b> ()</td></tr>
+<tr class="separator:a556dcab3c0deb14fde548a270d9168ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62b556bf59e83dae5bafd52cce4801a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62b556bf59e83dae5bafd52cce4801a7"></a>
+const SQLWarning *&#160;</td><td class="memItemRight" valign="bottom"><b>getWarnings</b> ()</td></tr>
+<tr class="separator:a62b556bf59e83dae5bafd52cce4801a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00820cf65fea6a9fd9cb936a6781db33"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00820cf65fea6a9fd9cb936a6781db33"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isClosed</b> ()</td></tr>
+<tr class="separator:a00820cf65fea6a9fd9cb936a6781db33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af395e4c12315d0dcf9e3a5abbcbb33e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af395e4c12315d0dcf9e3a5abbcbb33e2"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isReadOnly</b> ()</td></tr>
+<tr class="separator:af395e4c12315d0dcf9e3a5abbcbb33e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a081337e746b0eabcf0a7cb136b50277b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a081337e746b0eabcf0a7cb136b50277b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> ()</td></tr>
+<tr class="separator:a081337e746b0eabcf0a7cb136b50277b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19ebafbbc4bc37958bcc93c7fa0807e9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19ebafbbc4bc37958bcc93c7fa0807e9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>reconnect</b> ()</td></tr>
+<tr class="separator:a19ebafbbc4bc37958bcc93c7fa0807e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7242075ae362ec3fbe65194f7043abc4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7242075ae362ec3fbe65194f7043abc4"></a>
+sql::SQLString&#160;</td><td class="memItemRight" valign="bottom"><b>nativeSQL</b> (const sql::SQLString &amp;sql)</td></tr>
+<tr class="separator:a7242075ae362ec3fbe65194f7043abc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d4ab19b238692240183b849c84c2166"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d4ab19b238692240183b849c84c2166"></a>
+sql::PreparedStatement *&#160;</td><td class="memItemRight" valign="bottom"><b>prepareStatement</b> (const sql::SQLString &amp;sql)</td></tr>
+<tr class="separator:a5d4ab19b238692240183b849c84c2166"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b341cf31b1fadb55fa573d5fc570de7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b341cf31b1fadb55fa573d5fc570de7"></a>
+sql::PreparedStatement *&#160;</td><td class="memItemRight" valign="bottom"><b>prepareStatement</b> (const sql::SQLString &amp;sql, int autoGeneratedKeys)</td></tr>
+<tr class="separator:a4b341cf31b1fadb55fa573d5fc570de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02a26ce23b897f09189ddafd4b87849e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02a26ce23b897f09189ddafd4b87849e"></a>
+sql::PreparedStatement *&#160;</td><td class="memItemRight" valign="bottom"><b>prepareStatement</b> (const sql::SQLString &amp;sql, int columnIndexes[])</td></tr>
+<tr class="separator:a02a26ce23b897f09189ddafd4b87849e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcddea07aca0542a2a6e814ba1ee4bd6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afcddea07aca0542a2a6e814ba1ee4bd6"></a>
+sql::PreparedStatement *&#160;</td><td class="memItemRight" valign="bottom"><b>prepareStatement</b> (const sql::SQLString &amp;sql, int resultSetType, int resultSetConcurrency)</td></tr>
+<tr class="separator:afcddea07aca0542a2a6e814ba1ee4bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a156ab360753b8b1ca11682422d9914b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a156ab360753b8b1ca11682422d9914b3"></a>
+sql::PreparedStatement *&#160;</td><td class="memItemRight" valign="bottom"><b>prepareStatement</b> (const sql::SQLString &amp;sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)</td></tr>
+<tr class="separator:a156ab360753b8b1ca11682422d9914b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27a07ce9777574a0592fe6f8834e082f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27a07ce9777574a0592fe6f8834e082f"></a>
+sql::PreparedStatement *&#160;</td><td class="memItemRight" valign="bottom"><b>prepareStatement</b> (const sql::SQLString &amp;sql, sql::SQLString columnNames[])</td></tr>
+<tr class="separator:a27a07ce9777574a0592fe6f8834e082f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85e740e1d7cc9f16d357afdd9f4419d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af85e740e1d7cc9f16d357afdd9f4419d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>releaseSavepoint</b> (Savepoint *savepoint)</td></tr>
+<tr class="separator:af85e740e1d7cc9f16d357afdd9f4419d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30102a74e65a62cff9c36ce77a8c7f44"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a30102a74e65a62cff9c36ce77a8c7f44"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>rollback</b> ()</td></tr>
+<tr class="separator:a30102a74e65a62cff9c36ce77a8c7f44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64fc3a6f403a19fee712142141a07ef4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64fc3a6f403a19fee712142141a07ef4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>rollback</b> (Savepoint *savepoint)</td></tr>
+<tr class="separator:a64fc3a6f403a19fee712142141a07ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66dd8515ee9ccfe186fc1d2b597f220f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66dd8515ee9ccfe186fc1d2b597f220f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAutoCommit</b> (bool autoCommit)</td></tr>
+<tr class="separator:a66dd8515ee9ccfe186fc1d2b597f220f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85487982563f163064269bbe072bf2a0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a85487982563f163064269bbe072bf2a0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setCatalog</b> (const sql::SQLString &amp;catalog)</td></tr>
+<tr class="separator:a85487982563f163064269bbe072bf2a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9c04f366688e047e898487bc6fd6e1b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9c04f366688e047e898487bc6fd6e1b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setSchema</b> (const sql::SQLString &amp;catalog)</td></tr>
+<tr class="separator:ae9c04f366688e047e898487bc6fd6e1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a146973ddeaf89e344b719cefb09c55ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a146973ddeaf89e344b719cefb09c55ad"></a>
+sql::Connection *&#160;</td><td class="memItemRight" valign="bottom"><b>setClientOption</b> (const sql::SQLString &amp;optionName, const void *optionValue)</td></tr>
+<tr class="separator:a146973ddeaf89e344b719cefb09c55ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e01fff22d660d797501ac29e9a436e7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e01fff22d660d797501ac29e9a436e7"></a>
+sql::Connection *&#160;</td><td class="memItemRight" valign="bottom"><b>setClientOption</b> (const sql::SQLString &amp;optionName, const sql::SQLString &amp;optionValue)</td></tr>
+<tr class="separator:a2e01fff22d660d797501ac29e9a436e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4703a47ce23ba73ec2fadfc680b2e868"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4703a47ce23ba73ec2fadfc680b2e868"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setHoldability</b> (int holdability)</td></tr>
+<tr class="separator:a4703a47ce23ba73ec2fadfc680b2e868"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4bafbedfb801fa73694ddbfca4a95c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4bafbedfb801fa73694ddbfca4a95c6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setReadOnly</b> (bool readOnly)</td></tr>
+<tr class="separator:ac4bafbedfb801fa73694ddbfca4a95c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afca8998459c9f06788b3ed3be25b81de"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afca8998459c9f06788b3ed3be25b81de"></a>
+sql::Savepoint *&#160;</td><td class="memItemRight" valign="bottom"><b>setSavepoint</b> ()</td></tr>
+<tr class="separator:afca8998459c9f06788b3ed3be25b81de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d0045db252b83fd0222e716f9bfc71d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d0045db252b83fd0222e716f9bfc71d"></a>
+sql::Savepoint *&#160;</td><td class="memItemRight" valign="bottom"><b>setSavepoint</b> (const sql::SQLString &amp;name)</td></tr>
+<tr class="separator:a2d0045db252b83fd0222e716f9bfc71d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50c5f85205c2333804ee503778ed05b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50c5f85205c2333804ee503778ed05b0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setTransactionIsolation</b> (enum_transaction_isolation level)</td></tr>
+<tr class="separator:a50c5f85205c2333804ee503778ed05b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae35fdfcee5de39dc2ec759bc5b8145be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae35fdfcee5de39dc2ec759bc5b8145be"></a>
+virtual sql::SQLString&#160;</td><td class="memItemRight" valign="bottom"><b>getSessionVariable</b> (const sql::SQLString &amp;varname)</td></tr>
+<tr class="separator:ae35fdfcee5de39dc2ec759bc5b8145be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e3eb3eed3d7092c9d03efd7d52629c2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e3eb3eed3d7092c9d03efd7d52629c2"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setSessionVariable</b> (const sql::SQLString &amp;varname, const sql::SQLString &amp;value)</td></tr>
+<tr class="separator:a5e3eb3eed3d7092c9d03efd7d52629c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8a42ed4da0fb3810a7624cc969d7ced"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8a42ed4da0fb3810a7624cc969d7ced"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setSessionVariable</b> (const sql::SQLString &amp;varname, unsigned int value)</td></tr>
+<tr class="separator:ad8a42ed4da0fb3810a7624cc969d7ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31744f8fd6beaa9c488f947962c1bae6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a31744f8fd6beaa9c488f947962c1bae6"></a>
+virtual sql::SQLString&#160;</td><td class="memItemRight" valign="bottom"><b>getLastStatementInfo</b> ()</td></tr>
+<tr class="separator:a31744f8fd6beaa9c488f947962c1bae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<hr/>La documentation de cette classe a été générée à partir du fichier suivant :<ul>
+<li><a class="el" href="mysql__connection_8h_source.html">mysql_connection.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

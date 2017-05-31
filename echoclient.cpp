@@ -16,10 +16,9 @@
 
 QT_USE_NAMESPACE
 
-EchoClient::EchoClient(const QUrl &url, /*const QUrl &url2,*/ bool debug, QObject *parent) :
+EchoClient::EchoClient(const QUrl &url, bool debug, QObject *parent) :
     QObject(parent),
     m_url(url),
-    /*u_url(url2),*/
     m_debug(debug)
 {
     this->bdd_complete_path = askBddIp();
@@ -29,9 +28,7 @@ EchoClient::EchoClient(const QUrl &url, /*const QUrl &url2,*/ bool debug, QObjec
     if (m_debug)
         qDebug() << "WebSocket server:" << url;
     connect(&m_webSocket, &QWebSocket::connected, this, &EchoClient::onConnected);
-    /*connect(&u_webSocket, &QWebSocket::connected, this, &EchoClient::onConnected);*/
-    //connect(&m_webSocket, &QWebSocket::disconnected, this, &EchoClient::closed);
-    /*u_webSocket.open(QUrl(url2));*/
+
     m_webSocket.open(QUrl(url));
 }
 
@@ -46,7 +43,7 @@ void EchoClient::onConnected()
 
 void EchoClient::onTextMessageReceived(QString message)
 {
-  qDebug() << "TAILLE DE LA TRAME " << message.length() << endl;
+  //qDebug() << "TAILLE DE LA TRAME " << message.length() << endl;
   if (message.length() > 100)
   {
     qDebug() << "TRAITEMENT CHAMBRE" << endl;
@@ -132,7 +129,7 @@ QString EchoClient::decodeTime(double dtime)
   int itime = stoi(stime);
   QDateTime timestamp;
   timestamp.setTime_t(itime);
-  qDebug() << timestamp << endl;
+  //qDebug() << timestamp << endl;
   QString time = timestamp.addSecs(7200).toString(Qt::ISODate);
   //qDebug() << time << endl;
   return time;
@@ -143,11 +140,11 @@ string EchoClient::askBddIp()
   string bdd_ip;
   string bdd_port;
 
-  cout << "Quelle est l'addresse utilisée pour se connecter à la base de données ? " << endl;
+  cout << "Quelle est l'addresse utilisée pour se connecter à la base de données ? (ex:127.0.0.1)" << endl;
   cin >> bdd_ip;
   //cout << bdd_ip << endl;
 
-  cout << "le port utilisé ? " << endl;
+  cout << "le port utilisé ? (ex:3306)" << endl;
   cin >> bdd_port;
   //cout << bdd_port << endl;
 
@@ -158,7 +155,7 @@ string EchoClient::askBddIp()
 string EchoClient::askBddLogin()
 {
   string bdd_login;
-  cout << "Identifiant : " << endl;
+  cout << "Identifiant : (ex:equipe)" << endl;
   cin >> bdd_login;
   //cout << bdd_login << endl;
   return bdd_login;
@@ -167,7 +164,7 @@ string EchoClient::askBddLogin()
 string EchoClient::askBddPassword()
 {
   string bdd_pass;
-  cout << "Mot de passe : " << endl;
+  cout << "Mot de passe : (ex:toor)" << endl;
   cin >> bdd_pass;
   //cout << bdd_pass << endl;
   return bdd_pass;
@@ -218,11 +215,11 @@ void EchoClient::traitementChambre(QString message)
 	int temperature = decodeMTHO2(MTHO2);
 	int humidite = decodeHumidity(MTHO2);
 
-	qDebug() << "chute : " << chute << endl << "CO2 : " << CO2 << endl;
-	qDebug() << "capteur MTHO2 : " << MTHO2 << endl << "four : " << four << endl;
-	qDebug() << "tv : " << tv << endl << "utilisateur : " << user << endl;
-	qDebug() << "temperature : " << temperature << endl << "humidite : " << humidite << endl;
-	qDebug() << "time : " << time << endl;
+	qDebug() << "Chute : " << chute << endl << "CO2 : " << CO2 << endl;
+	qDebug() << "Capteur MTHO2 : " << MTHO2 << endl << "Four : " << four << endl;
+	qDebug() << "Tv : " << tv << endl << "Utilisateur : " << user << endl;
+	qDebug() << "Temperature : " << temperature << endl << "Humidite : " << humidite << endl;
+	qDebug() << "Date et Heure : " << time << endl;
 
 
 //PARTIE MYSQL
@@ -235,7 +232,6 @@ void EchoClient::traitementChambre(QString message)
 void EchoClient::traitementUtilisateur(QString message)
 {
   QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
-  qDebug() << "trame : " << jsonResponse << endl;
 	QJsonObject jsonObject = jsonResponse.object();
 
   QJsonValue time1=jsonObject.value(QString("TIME"));
@@ -249,7 +245,10 @@ void EchoClient::traitementUtilisateur(QString message)
 
   int pas2 = pas1.toInt();
   QString pas = QString::number(pas2);
-  qDebug() << "pas :qjsonvalue:int:qstring: " << endl << pas1 << " : " << pas2 << " : " << pas << endl;
+
+  qDebug() << "Date et Heure : " << time << endl;
+  qDebug() << "Utilisateur : " << user << endl;
+  qDebug() << "Nombre de pas dans l'heure : " << pas << endl;
 
   isenlab_db = new DataBase(getBddIp(), getBddLogin(), getBddPassword(), time, 0, 0, user, "", 0, 0, "", pas, getIdRoom());
 

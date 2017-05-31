@@ -17,7 +17,6 @@ DEPENDPATH += $$PWD/mysql-connector-cpp/include
 
 
 LIBS += -L$$PWD/mysql-connector-cpp/lib/ -lmysqlcppconn
-LIBS += -L$$PWD/SmtpClient/src/SmtpMime
 
 INCLUDEPATH += $$PWD/mysql-connector-cpp/include
 DEPENDPATH += $$PWD/mysql-connector-cpp/include

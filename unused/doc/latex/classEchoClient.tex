@@ -1,0 +1,305 @@
+\hypertarget{classEchoClient}{}\section{Référence de la classe Echo\+Client}
+\label{classEchoClient}\index{Echo\+Client@{Echo\+Client}}
+
+
+La classe {\bfseries \hyperlink{classEchoClient}{Echo\+Client}} est l\textquotesingle{}ensemble des fonctionnalités permettant de récupérer une trame et de la traiter.  
+
+
+
+
+{\ttfamily \#include $<$echoclient.\+h$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Echo\+Client\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=147pt]{classEchoClient__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Graphe de collaboration de Echo\+Client\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=147pt]{classEchoClient__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Signaux}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries closed} ()\hypertarget{classEchoClient_a0834d7f65bf0ed5411573ef34bf638e7}{}\label{classEchoClient_a0834d7f65bf0ed5411573ef34bf638e7}
+
+\end{DoxyCompactItemize}
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classEchoClient_a77a327e3a287f5797820cd5265164593}{Echo\+Client} (const Q\+Url \&url, bool debug=false, Q\+Object $\ast$parent=Q\+\_\+\+N\+U\+L\+L\+P\+TR)
+\begin{DoxyCompactList}\small\item\em Constructeur de la classe \hyperlink{classEchoClient}{Echo\+Client}. \end{DoxyCompactList}\item 
+void \hyperlink{classEchoClient_ac834f3a4331b8a0674a3614cf4513b9a}{traitement\+Chambre} (Q\+String message)
+\begin{DoxyCompactList}\small\item\em Fonction qui sépare les éléments de la trame de la pièce, les traite et les envoie à la base de données. \end{DoxyCompactList}\item 
+void \hyperlink{classEchoClient_a79508ca23964331b9b189a5282245d2d}{traitement\+Utilisateur} (Q\+String message)
+\begin{DoxyCompactList}\small\item\em Fonction qui sépare les éléments de la trame utilisateur, les traite et les envoie à la base de données. \end{DoxyCompactList}\item 
+int \hyperlink{classEchoClient_acf8a95fc397766e5429fc2cf7bd1f54d}{decode\+M\+T\+H\+O2} (Q\+String mtho2)
+\begin{DoxyCompactList}\small\item\em Fonction qui extrait la temperature de la chaine envoyée par le capteur M\+T\+H\+O2. \end{DoxyCompactList}\item 
+int \hyperlink{classEchoClient_ab22fb89d56621f22e7547ed365f94bb5}{decode\+Humidity} (Q\+String qstr\+\_\+humidity)
+\begin{DoxyCompactList}\small\item\em Fonction qui extrait le niveau d\textquotesingle{}humidité de la chaine envoyée par le capteur M\+T\+H\+O2. \end{DoxyCompactList}\item 
+Q\+String \hyperlink{classEchoClient_a2463696ad18476d25d9e8eac47e65436}{decode\+Time} (double dtime)
+\begin{DoxyCompactList}\small\item\em Fonction qui décode la timestamp entré et renvoie l\textquotesingle{}heure en format lisible. \end{DoxyCompactList}\item 
+string \hyperlink{classEchoClient_a2f6bc3131e02cbbcf3d422b08ec88185}{ask\+Bdd\+Ip} ()
+\begin{DoxyCompactList}\small\item\em Fonction setter qui demande à l\textquotesingle{}utilisateur l\textquotesingle{}adresse IP et le port de la base de données. \end{DoxyCompactList}\item 
+string \hyperlink{classEchoClient_ad6b9cddeae9043d79bf482da303c4b21}{ask\+Bdd\+Login} ()
+\begin{DoxyCompactList}\small\item\em Fonction setter qui demande à l\textquotesingle{}utilisateur son identifiant pour se connecter à la base de données. \end{DoxyCompactList}\item 
+string \hyperlink{classEchoClient_a7c8ccafa27fff1427fedae3fa8327e6e}{ask\+Bdd\+Password} ()
+\begin{DoxyCompactList}\small\item\em Fonction setter qui demande à l\textquotesingle{}utilisateur le mot de passe pour se connecter à la base de données. \end{DoxyCompactList}\item 
+string \hyperlink{classEchoClient_a80d1d6acbdc39d74740bf0e66c6e4c27}{ask\+Id\+Room} ()
+\begin{DoxyCompactList}\small\item\em Fonction setter qui demande à l\textquotesingle{}utilisateur la pièce à laquelle est associée l\textquotesingle{}addresse IP rentrée plus tôt. \end{DoxyCompactList}\item 
+string \hyperlink{classEchoClient_a3f7731443eebfdb9dc3484aa9f44d0db}{get\+Bdd\+Ip} ()
+\begin{DoxyCompactList}\small\item\em Fonction getter retournant l\textquotesingle{}addresse de la base de données sous forme de chaine de caractères. \end{DoxyCompactList}\item 
+string \hyperlink{classEchoClient_a4e8b1f06f6149d913b87786d0b926c2b}{get\+Bdd\+Login} ()
+\begin{DoxyCompactList}\small\item\em Fonction getter retournant le login de la base de données sous forme de chaine de caractères. \end{DoxyCompactList}\item 
+string \hyperlink{classEchoClient_afefb25861ae733ed0b74ace091843ab3}{get\+Bdd\+Password} ()
+\begin{DoxyCompactList}\small\item\em Fonction getter retournant le mot de passe de la base de données sous forme de chaine de caractères. \end{DoxyCompactList}\item 
+string \hyperlink{classEchoClient_a7c173d78a32ebadb5bd8320ebcef25b9}{get\+Id\+Room} ()
+\begin{DoxyCompactList}\small\item\em Fonction getter retournant le numero de la pièce sous forme de chaine de caractères. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+La classe {\bfseries \hyperlink{classEchoClient}{Echo\+Client}} est l\textquotesingle{}ensemble des fonctionnalités permettant de récupérer une trame et de la traiter. 
+
+\subsection{Documentation des constructeurs et destructeur}
+\index{Echo\+Client@{Echo\+Client}!Echo\+Client@{Echo\+Client}}
+\index{Echo\+Client@{Echo\+Client}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{Echo\+Client(const Q\+Url \&url, bool debug=false, Q\+Object $\ast$parent=\+Q\+\_\+\+N\+U\+L\+L\+P\+T\+R)}{EchoClient(const QUrl &url, bool debug=false, QObject *parent=Q_NULLPTR)}}]{\setlength{\rightskip}{0pt plus 5cm}Echo\+Client\+::\+Echo\+Client (
+\begin{DoxyParamCaption}
+\item[{const Q\+Url \&}]{url, }
+\item[{bool}]{debug = {\ttfamily false}, }
+\item[{Q\+Object $\ast$}]{parent = {\ttfamily Q\+\_\+NULLPTR}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classEchoClient_a77a327e3a287f5797820cd5265164593}{}\label{classEchoClient_a77a327e3a287f5797820cd5265164593}
+
+
+Constructeur de la classe \hyperlink{classEchoClient}{Echo\+Client}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em \&url} & \\
+\hline
+{\em debug} & \\
+\hline
+{\em $\ast$parent} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Documentation des fonctions membres}
+\index{Echo\+Client@{Echo\+Client}!ask\+Bdd\+Ip@{ask\+Bdd\+Ip}}
+\index{ask\+Bdd\+Ip@{ask\+Bdd\+Ip}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{ask\+Bdd\+Ip()}{askBddIp()}}]{\setlength{\rightskip}{0pt plus 5cm}string Echo\+Client\+::ask\+Bdd\+Ip (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_a2f6bc3131e02cbbcf3d422b08ec88185}{}\label{classEchoClient_a2f6bc3131e02cbbcf3d422b08ec88185}
+
+
+Fonction setter qui demande à l\textquotesingle{}utilisateur l\textquotesingle{}adresse IP et le port de la base de données. 
+
+\begin{DoxyReturn}{Renvoie}
+Adresse de la base de données (std\+::string). 
+\end{DoxyReturn}
+\index{Echo\+Client@{Echo\+Client}!ask\+Bdd\+Login@{ask\+Bdd\+Login}}
+\index{ask\+Bdd\+Login@{ask\+Bdd\+Login}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{ask\+Bdd\+Login()}{askBddLogin()}}]{\setlength{\rightskip}{0pt plus 5cm}string Echo\+Client\+::ask\+Bdd\+Login (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_ad6b9cddeae9043d79bf482da303c4b21}{}\label{classEchoClient_ad6b9cddeae9043d79bf482da303c4b21}
+
+
+Fonction setter qui demande à l\textquotesingle{}utilisateur son identifiant pour se connecter à la base de données. 
+
+\begin{DoxyReturn}{Renvoie}
+L\textquotesingle{}identifiant permettant de se connecter à la base de données (std\+::string). 
+\end{DoxyReturn}
+\index{Echo\+Client@{Echo\+Client}!ask\+Bdd\+Password@{ask\+Bdd\+Password}}
+\index{ask\+Bdd\+Password@{ask\+Bdd\+Password}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{ask\+Bdd\+Password()}{askBddPassword()}}]{\setlength{\rightskip}{0pt plus 5cm}string Echo\+Client\+::ask\+Bdd\+Password (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_a7c8ccafa27fff1427fedae3fa8327e6e}{}\label{classEchoClient_a7c8ccafa27fff1427fedae3fa8327e6e}
+
+
+Fonction setter qui demande à l\textquotesingle{}utilisateur le mot de passe pour se connecter à la base de données. 
+
+\begin{DoxyReturn}{Renvoie}
+Le mot de passe permettant de se connecter à la base de données (std\+::string). 
+\end{DoxyReturn}
+\index{Echo\+Client@{Echo\+Client}!ask\+Id\+Room@{ask\+Id\+Room}}
+\index{ask\+Id\+Room@{ask\+Id\+Room}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{ask\+Id\+Room()}{askIdRoom()}}]{\setlength{\rightskip}{0pt plus 5cm}string Echo\+Client\+::ask\+Id\+Room (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_a80d1d6acbdc39d74740bf0e66c6e4c27}{}\label{classEchoClient_a80d1d6acbdc39d74740bf0e66c6e4c27}
+
+
+Fonction setter qui demande à l\textquotesingle{}utilisateur la pièce à laquelle est associée l\textquotesingle{}addresse IP rentrée plus tôt. 
+
+\begin{DoxyReturn}{Renvoie}
+Le numero de la pièce surveillée (std\+::string). 
+\end{DoxyReturn}
+\index{Echo\+Client@{Echo\+Client}!decode\+Humidity@{decode\+Humidity}}
+\index{decode\+Humidity@{decode\+Humidity}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{decode\+Humidity(\+Q\+String qstr\+\_\+humidity)}{decodeHumidity(QString qstr_humidity)}}]{\setlength{\rightskip}{0pt plus 5cm}int Echo\+Client\+::decode\+Humidity (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{qstr\+\_\+humidity}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_ab22fb89d56621f22e7547ed365f94bb5}{}\label{classEchoClient_ab22fb89d56621f22e7547ed365f94bb5}
+
+
+Fonction qui extrait le niveau d\textquotesingle{}humidité de la chaine envoyée par le capteur M\+T\+H\+O2. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em qstr\+\_\+humidity} & Chaine binaire envoyée par le capteur M\+T\+H\+O2. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Le taux d\textquotesingle{}humidité de la pièce (int). 
+\end{DoxyReturn}
+\index{Echo\+Client@{Echo\+Client}!decode\+M\+T\+H\+O2@{decode\+M\+T\+H\+O2}}
+\index{decode\+M\+T\+H\+O2@{decode\+M\+T\+H\+O2}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{decode\+M\+T\+H\+O2(\+Q\+String mtho2)}{decodeMTHO2(QString mtho2)}}]{\setlength{\rightskip}{0pt plus 5cm}int Echo\+Client\+::decode\+M\+T\+H\+O2 (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{mtho2}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_acf8a95fc397766e5429fc2cf7bd1f54d}{}\label{classEchoClient_acf8a95fc397766e5429fc2cf7bd1f54d}
+
+
+Fonction qui extrait la temperature de la chaine envoyée par le capteur M\+T\+H\+O2. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em qstr\+\_\+humidity} & Chaine binaire envoyée par le capteur M\+T\+H\+O2. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+La temperature dans la pièce (int). 
+\end{DoxyReturn}
+\index{Echo\+Client@{Echo\+Client}!decode\+Time@{decode\+Time}}
+\index{decode\+Time@{decode\+Time}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{decode\+Time(double dtime)}{decodeTime(double dtime)}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Echo\+Client\+::decode\+Time (
+\begin{DoxyParamCaption}
+\item[{double}]{dtime}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_a2463696ad18476d25d9e8eac47e65436}{}\label{classEchoClient_a2463696ad18476d25d9e8eac47e65436}
+
+
+Fonction qui décode la timestamp entré et renvoie l\textquotesingle{}heure en format lisible. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em dtime} & Timestamp de la date et l\textquotesingle{}heure actuelle. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+La date et l\textquotesingle{}heure en une chaine de caractères (Q\+String). 
+\end{DoxyReturn}
+\index{Echo\+Client@{Echo\+Client}!get\+Bdd\+Ip@{get\+Bdd\+Ip}}
+\index{get\+Bdd\+Ip@{get\+Bdd\+Ip}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{get\+Bdd\+Ip()}{getBddIp()}}]{\setlength{\rightskip}{0pt plus 5cm}string Echo\+Client\+::get\+Bdd\+Ip (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_a3f7731443eebfdb9dc3484aa9f44d0db}{}\label{classEchoClient_a3f7731443eebfdb9dc3484aa9f44d0db}
+
+
+Fonction getter retournant l\textquotesingle{}addresse de la base de données sous forme de chaine de caractères. 
+
+\begin{DoxyReturn}{Renvoie}
+Adresse de la base de données (std\+::string). 
+\end{DoxyReturn}
+\index{Echo\+Client@{Echo\+Client}!get\+Bdd\+Login@{get\+Bdd\+Login}}
+\index{get\+Bdd\+Login@{get\+Bdd\+Login}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{get\+Bdd\+Login()}{getBddLogin()}}]{\setlength{\rightskip}{0pt plus 5cm}string Echo\+Client\+::get\+Bdd\+Login (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_a4e8b1f06f6149d913b87786d0b926c2b}{}\label{classEchoClient_a4e8b1f06f6149d913b87786d0b926c2b}
+
+
+Fonction getter retournant le login de la base de données sous forme de chaine de caractères. 
+
+\begin{DoxyReturn}{Renvoie}
+L\textquotesingle{}identifiant permettant de se connecter à la base de données (std\+::string). 
+\end{DoxyReturn}
+\index{Echo\+Client@{Echo\+Client}!get\+Bdd\+Password@{get\+Bdd\+Password}}
+\index{get\+Bdd\+Password@{get\+Bdd\+Password}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{get\+Bdd\+Password()}{getBddPassword()}}]{\setlength{\rightskip}{0pt plus 5cm}string Echo\+Client\+::get\+Bdd\+Password (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_afefb25861ae733ed0b74ace091843ab3}{}\label{classEchoClient_afefb25861ae733ed0b74ace091843ab3}
+
+
+Fonction getter retournant le mot de passe de la base de données sous forme de chaine de caractères. 
+
+\begin{DoxyReturn}{Renvoie}
+Mot de passe de la base de données (std\+::string). 
+\end{DoxyReturn}
+\index{Echo\+Client@{Echo\+Client}!get\+Id\+Room@{get\+Id\+Room}}
+\index{get\+Id\+Room@{get\+Id\+Room}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{get\+Id\+Room()}{getIdRoom()}}]{\setlength{\rightskip}{0pt plus 5cm}string Echo\+Client\+::get\+Id\+Room (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_a7c173d78a32ebadb5bd8320ebcef25b9}{}\label{classEchoClient_a7c173d78a32ebadb5bd8320ebcef25b9}
+
+
+Fonction getter retournant le numero de la pièce sous forme de chaine de caractères. 
+
+\begin{DoxyReturn}{Renvoie}
+Le numero de la pièce (std\+::string). 
+\end{DoxyReturn}
+\index{Echo\+Client@{Echo\+Client}!traitement\+Chambre@{traitement\+Chambre}}
+\index{traitement\+Chambre@{traitement\+Chambre}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{traitement\+Chambre(\+Q\+String message)}{traitementChambre(QString message)}}]{\setlength{\rightskip}{0pt plus 5cm}void Echo\+Client\+::traitement\+Chambre (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{message}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_ac834f3a4331b8a0674a3614cf4513b9a}{}\label{classEchoClient_ac834f3a4331b8a0674a3614cf4513b9a}
+
+
+Fonction qui sépare les éléments de la trame de la pièce, les traite et les envoie à la base de données. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em message} & La trame transmise. \\
+\hline
+\end{DoxyParams}
+\index{Echo\+Client@{Echo\+Client}!traitement\+Utilisateur@{traitement\+Utilisateur}}
+\index{traitement\+Utilisateur@{traitement\+Utilisateur}!Echo\+Client@{Echo\+Client}}
+\subsubsection[{\texorpdfstring{traitement\+Utilisateur(\+Q\+String message)}{traitementUtilisateur(QString message)}}]{\setlength{\rightskip}{0pt plus 5cm}void Echo\+Client\+::traitement\+Utilisateur (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{message}
+\end{DoxyParamCaption}
+)}\hypertarget{classEchoClient_a79508ca23964331b9b189a5282245d2d}{}\label{classEchoClient_a79508ca23964331b9b189a5282245d2d}
+
+
+Fonction qui sépare les éléments de la trame utilisateur, les traite et les envoie à la base de données. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em message} & La trame transmise. \\
+\hline
+\end{DoxyParams}
+
+
+La documentation de cette classe a été générée à partir des fichiers suivants \+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{echoclient_8h}{echoclient.\+h}\item 
+\hyperlink{echoclient_8cpp}{echoclient.\+cpp}\item 
+moc\+\_\+echoclient.\+cpp\end{DoxyCompactItemize}
